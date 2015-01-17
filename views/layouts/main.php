@@ -25,12 +25,13 @@ AppAsset::register($this);
 <div class="wrap">
 	<?php
 	NavBar::begin([
-		'brandLabel' => 'iVatch',
+		'brandLabel' => false,
 		'brandUrl' => Yii::$app->homeUrl,
 		'options' => [
 			'class' => 'navbar-inverse navbar-fixed-top',
 		],
 	]);
+
 	echo Nav::widget([
 		'options' => ['class' => 'navbar-nav navbar-right'],
 		'items' => [
@@ -44,99 +45,63 @@ AppAsset::register($this);
 				 'linkOptions' => ['data-method' => 'post']],
 		],
 	]);
-	NavBar::end();
+    NavBar::end();
+    // Site header
 	?>
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="brand">
+                    <div class="wrap">
+                        <h1>
+                            <a href="./">iva <span class="glyphicon glyphicon-facetime-video"></span>tch</a>
+                        </h1>
+                        <div class="slogan">Broadcasting service</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--    Parallax-->
+    <div class="stellar-block first">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="box_2">
+                        <h2 class="text_4 color_3">
+                            Hello there!
+                        </h2>
+
+                        <h3 class="text_5 color_4">
+                            welcome to our night club
+                        </h3>
+
+                        <p class="text_6 color_3">
+                            Mes cuml diased dolore <br>
+                            commet ipsuco ipsum comete.
+                        </p>
+
+                        <p class="text_7 color_4">Clark Dimond</p>
+
+                        <p class="color_7">
+                            Dolor nunc vule putateulr ips dol consec.Donec sem ertet laciniate ultricie upie disse utes
+                            comete dolo lectus. fgilla itollicil tua ludin dolor nec met quam accumsan. Dolore condime
+                            netus lullam utlacus adipiscing ipsum molestie euismod lore estibulum vel libero ipsum sit
+                            <br>
+                            amet sollicitudin ante. Aenean imperdiet aliquet hendreritunc interdum ullamcorper lec tuset
+                            pellentesqu enim interdum atuspendisse malesuada dignissim.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 	<div class="container">
 		<?= Breadcrumbs::widget([
 			'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 		]) ?>
-
-		<header id="header">
-			<div class="header_wrap">
-				<div id="stuck_container">
-					<div class="container">
-						<div class="row">
-							<div class="grid_12">
-								<div class="brand">
-									<div class="wrap">
-										<h1>
-											<a href="http://livedemo00.template-help.com/wt_51781/">dab <span class="fa fa-bomb"></span> mb</a>
-										</h1>
-
-										<div class="slogan">Night Club</div>
-									</div>
-								</div>
-
-								<nav>
-									<ul class="sf-menu sf-js-enabled sf-arrows">
-										<li class="current"><a class="fa-home" href="http://livedemo00.template-help.com/wt_51781/"></a></li>
-										<li><a href="http://livedemo00.template-help.com/wt_51781/index-1.html">About us</a></li>
-										<li><a href="http://livedemo00.template-help.com/wt_51781/index-2.html">News &amp; Events</a></li>
-										<li><a href="http://livedemo00.template-help.com/wt_51781/index-3.html">Parties</a></li>
-										<li>
-											<a class="sf-with-ul" href="http://livedemo00.template-help.com/wt_51781/index-4.html">Blog</a>
-											<ul style="display: none;" class="sub-menu">
-												<li><a href="#">Dolore ipsu</a></li>
-												<li><a class="sf-with-ul" href="#">Consecte</a>
-													<ul style="display: none;" class="sub-menu">
-														<li><a href="#">Dolore ipsu</a></li>
-														<li><a href="#">Consecte</a></li>
-														<li><a href="#">Elit Conseq</a></li>
-													</ul>
-												</li>
-												<li><a href="#">Elit Conseq</a></li>
-											</ul>
-										</li>
-										<li><a href="http://livedemo00.template-help.com/wt_51781/index-5.html">Contacts</a></li>
-									</ul><select style="display: inline-block;" class="select-menu sf-menu sf-js-enabled sf-arrows"><option value="#">Navigate to...</option><option selected="selected" value="http://livedemo00.template-help.com/wt_51781/">&nbsp;Home</option><option value="http://livedemo00.template-help.com/wt_51781/index-1.html">&nbsp;About us</option><option value="http://livedemo00.template-help.com/wt_51781/index-2.html">&nbsp;News &amp; Events</option><option value="http://livedemo00.template-help.com/wt_51781/index-3.html">&nbsp;Parties</option><option value="http://livedemo00.template-help.com/wt_51781/index-4.html">&nbsp;Blog</option><option value="http://livedemo00.template-help.com/wt_51781/#">–&nbsp;Dolore ipsu</option><option value="http://livedemo00.template-help.com/wt_51781/#">–&nbsp;Consecte</option><option value="http://livedemo00.template-help.com/wt_51781/#">––&nbsp;Dolore ipsu</option><option value="http://livedemo00.template-help.com/wt_51781/#">––&nbsp;Consecte</option><option value="http://livedemo00.template-help.com/wt_51781/#">––&nbsp;Elit Conseq</option><option value="http://livedemo00.template-help.com/wt_51781/#">–&nbsp;Elit Conseq</option><option value="http://livedemo00.template-help.com/wt_51781/index-5.html">&nbsp;Contacts</option></select>
-								</nav>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div style="top: -64px; visibility: hidden; position: fixed; width: 100%;" class="isStuck" id="stuck_container">
-					<div class="container">
-						<div class="row">
-							<div class="grid_12">
-								<div class="brand">
-									<div class="wrap">
-										<h1>
-											<a href="http://livedemo00.template-help.com/wt_51781/">dab <span class="fa fa-bomb"></span> mb</a>
-										</h1>
-
-										<div class="slogan">Night Club</div>
-									</div>
-								</div>
-
-								<nav>
-									<ul class="sf-menu sf-js-enabled sf-arrows">
-										<li class="current"><a class="fa-home" href="http://livedemo00.template-help.com/wt_51781/"></a></li>
-										<li><a href="http://livedemo00.template-help.com/wt_51781/index-1.html">About us</a></li>
-										<li><a href="http://livedemo00.template-help.com/wt_51781/index-2.html">News &amp; Events</a></li>
-										<li><a href="http://livedemo00.template-help.com/wt_51781/index-3.html">Parties</a></li>
-										<li>
-											<a class="sf-with-ul" href="http://livedemo00.template-help.com/wt_51781/index-4.html">Blog</a>
-											<ul style="display: none;" class="sub-menu">
-												<li><a href="#">Dolore ipsu</a></li>
-												<li><a class="sf-with-ul" href="#">Consecte</a>
-													<ul style="display: none;" class="sub-menu">
-														<li><a href="#">Dolore ipsu</a></li>
-														<li><a href="#">Consecte</a></li>
-														<li><a href="#">Elit Conseq</a></li>
-													</ul>
-												</li>
-												<li><a href="#">Elit Conseq</a></li>
-											</ul>
-										</li>
-										<li><a href="http://livedemo00.template-help.com/wt_51781/index-5.html">Contacts</a></li>
-									</ul><select style="display: inline-block;" class="select-menu sf-menu sf-js-enabled sf-arrows"><option value="#">Navigate to...</option><option selected="selected" value="http://livedemo00.template-help.com/wt_51781/">&nbsp;Home</option><option value="http://livedemo00.template-help.com/wt_51781/index-1.html">&nbsp;About us</option><option value="http://livedemo00.template-help.com/wt_51781/index-2.html">&nbsp;News &amp; Events</option><option value="http://livedemo00.template-help.com/wt_51781/index-3.html">&nbsp;Parties</option><option value="http://livedemo00.template-help.com/wt_51781/index-4.html">&nbsp;Blog</option><option value="http://livedemo00.template-help.com/wt_51781/#">–&nbsp;Dolore ipsu</option><option value="http://livedemo00.template-help.com/wt_51781/#">–&nbsp;Consecte</option><option value="http://livedemo00.template-help.com/wt_51781/#">––&nbsp;Dolore ipsu</option><option value="http://livedemo00.template-help.com/wt_51781/#">––&nbsp;Consecte</option><option value="http://livedemo00.template-help.com/wt_51781/#">––&nbsp;Elit Conseq</option><option value="http://livedemo00.template-help.com/wt_51781/#">–&nbsp;Elit Conseq</option><option value="http://livedemo00.template-help.com/wt_51781/index-5.html">&nbsp;Contacts</option></select>
-								</nav>
-							</div>
-						</div>
-					</div>
-				</div></div>
-		</header>
 
 
 		<?= $content ?>
@@ -144,10 +109,35 @@ AppAsset::register($this);
 </div>
 
 <footer class="footer">
-	<div class="container">
-		<p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-		<p class="pull-right"><?= Yii::powered() ?></p>
-	</div>
+<!--	<div class="container">-->
+<!--		<p class="pull-left">&copy; My Company --><?//= date('Y') ?><!--</p>-->
+<!--		<p class="pull-right">--><?//= Yii::powered() ?><!--</p>-->
+<!--	</div>-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="map marker"></div>
+                <p class="footer_description">IVATCH <br>
+                    28 JACKSON BLVD STE 1020 <br>
+                    CHICAGO, IL 60604-2340</p>
+            </div>
+            <div class="col-sm-4">
+                <div class="marker phone"></div>
+                <p class="footer_description">TELEPHONE: +1 800 603 6035 <br>
+                    E-MAIL: MAIL@DEMOLINK.ORG</p>
+            </div>
+            <div class="col-sm-4">
+                <p class="footer_description"><a href="<?php echo Yii::$app->homeUrl ?>">IVATCH  </a> © 2015 | Privacy Policy</p>
+                <ul class="social-list">
+                    <li><a class="fa fa-facebook" href="#"></a></li>
+                    <li><a class="fa fa-rss" href="#"></a></li>
+                    <li><a class="fa fa-twitter" href="#"></a></li>
+                    <li><a class="fa fa-google-plus" href="#"></a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
 </footer>
 
 <?php $this->endBody() ?>
