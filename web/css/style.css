@@ -8,7 +8,8 @@ a {
 /*------------------------------------- SITE HEADER ---------------------------------------*/
 
 .jumbotron{
-    background: url("../images/bg-header.jpg")
+    background: url("../images/bg-header.jpg");
+    margin-bottom: 0;
 }
 
 .brand {
@@ -165,4 +166,34 @@ footer .footer_description{
     footer .container{
     }
 
+}
+
+/*----------------------------- PARALLAX --------------------------*/
+
+#features {
+    background: url(../images/home3.jpg) 50% 0 fixed;
+    height: auto;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    padding: 150px 0;
+}
+
+#features .single_feature {
+    background: white;
+    background-clip: content-box;
+}
+#features .heading {
+    padding: 15px;
+}
+#features .description {
+    padding: 10px;
+}
+#feature_heading{
+    text-align: center;
+    margin: -100px 0 50px 0;
+    text-transform: uppercase;
+    color: white;
+    font: 700 80px/80px 'Open Sans', sans-serif;
 }

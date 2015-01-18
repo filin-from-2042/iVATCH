@@ -56,47 +56,59 @@ AppAsset::register($this);
                         <h1>
                             <a href="./">iva <span class="glyphicon glyphicon-facetime-video"></span>tch</a>
                         </h1>
-                        <div class="slogan">Broadcasting service</div>
+                        <div class="slogan">Streaming service</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-<!--    Parallax-->
-    <div class="stellar-block first">
+    <? //TODO: TO CURTAIN VIEW OF CONTROLLER   ?>
+    <!--     Parralax-->
+    <section id="features" data-speed="4" data-type="background">
         <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="box_2">
-                        <h2 class="text_4 color_3">
-                            Hello there!
-                        </h2>
+<!--            Content-->
+            <div class="body-content">
 
-                        <h3 class="text_5 color_4">
-                            welcome to our night club
-                        </h3>
+                <div class="row">
+                    <h2 id="feature_heading">
+                        Hello there!
+                    </h2>
+                    <div class="col-sm-4 single_feature">
+                        <h2 class="heading">Heading</h2>
 
-                        <p class="text_6 color_3">
-                            Mes cuml diased dolore <br>
-                            commet ipsuco ipsum comete.
-                        </p>
+                        <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                            ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                            fugiat nulla pariatur.</p>
 
-                        <p class="text_7 color_4">Clark Dimond</p>
+                        <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+                    </div>
+                    <div class="col-sm-4 single_feature">
+                        <h2 class="heading">Heading</h2>
 
-                        <p class="color_7">
-                            Dolor nunc vule putateulr ips dol consec.Donec sem ertet laciniate ultricie upie disse utes
-                            comete dolo lectus. fgilla itollicil tua ludin dolor nec met quam accumsan. Dolore condime
-                            netus lullam utlacus adipiscing ipsum molestie euismod lore estibulum vel libero ipsum sit
-                            <br>
-                            amet sollicitudin ante. Aenean imperdiet aliquet hendreritunc interdum ullamcorper lec tuset
-                            pellentesqu enim interdum atuspendisse malesuada dignissim.
-                        </p>
+                        <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                            ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                            fugiat nulla pariatur.</p>
+
+                        <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+                    </div>
+                    <div class="col-sm-4 single_feature">
+                        <h2 class="heading">Heading</h2>
+
+                        <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                            ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                            fugiat nulla pariatur.</p>
+
+                        <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
                     </div>
                 </div>
+
             </div>
         </div>
-    </div>
+    </section>
 
 	<div class="container">
 		<?= Breadcrumbs::widget([
