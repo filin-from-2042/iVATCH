@@ -4,6 +4,19 @@ $params = require(__DIR__ . '/params.php');
 
 $config = [
     'id' => 'basic',
+    'modules' => [
+
+        'category' => [
+
+            'class' => 'app\modules\category\categories',
+
+        ],
+        'news' => [
+
+            'class' => 'app\modules\news\news',
+
+        ],
+    ],
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
