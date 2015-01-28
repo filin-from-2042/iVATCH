@@ -6,16 +6,31 @@ $config = [
     'id' => 'basic',
     'modules' => [
 
-        'category' => [
+        'channels' => [
 
-            'class' => 'app\modules\category\categories',
+            'class' => 'app\modules\channels\Channels',
 
         ],
         'news' => [
 
-            'class' => 'app\modules\news\news',
+            'class' => 'app\modules\news\News',
 
         ],
+		'actions' => [
+
+			'class' => 'app\modules\actions\Actions',
+
+		],
+		'users' => [
+
+			'class' => 'app\modules\users\Users',
+
+		],
+		'events' => [
+
+			'class' => 'app\modules\events\Events',
+
+		],
     ],
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
