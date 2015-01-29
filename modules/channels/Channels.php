@@ -9,30 +9,28 @@ class Channels extends \yii\base\Module
     public function init()
     {
         parent::init();
-
         // custom initialization code goes here
-
 		$this->modules = [
 
-			'VideoTranslation' => [
+			'videotranslation' => [
 
 				'class' => 'app\modules\videotranslation\VideoTranslation',
 
 			],
 
-			'Chat' => [
+			'chat' => [
 
 				'class' => 'app\modules\chat\Chat',
 
 			],
 
-			'Categories' => [
+			'categories' => [
 
 				'class' => 'app\modules\categories\Categories',
 
 			],
 
-			'Tags' => [
+			'tags' => [
 
 				'class' => 'app\modules\tags\Tags',
 
