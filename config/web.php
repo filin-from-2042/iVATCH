@@ -31,6 +31,11 @@ $config = [
 			'class' => 'app\modules\events\Events',
 
 		],
+		'categories' => [
+
+			'class' => 'app\modules\categories\Categories',
+
+		],
     ],
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
