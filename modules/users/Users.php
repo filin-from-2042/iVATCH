@@ -13,7 +13,7 @@ class Users extends \yii\base\Module
         // custom initialization code goes here
 		$this->modules = [
 
-			'Registration' => [
+			'registration' => [
 
 				'class' => 'app\modules\registration\Registration',
 
