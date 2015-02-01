@@ -31,23 +31,25 @@ AppAsset::register($this);
 			'class' => 'navbar-inverse navbar-fixed-top top-menu',
 		],
 	]);
+	// Nav menu
+	$items = 	[
+        ['label' => 'События', 'url' => ['/events']],
+        ['label' => 'Категории', 'url' => ['/channels/categories/default/index']]
+	];
+	if (Yii::$app->user->isGuest) $items[]=  ['label' => 'Login', 'url' => ['/site/login']];
+	else
+	{
+		$items[]=['label' => 'Profile', 'url' => ['/users/registration/default/user']];
+		$items[]=['label' => 'Logout (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'],  'linkOptions' => ['data-method' => 'post']];
+	}
 	echo Nav::widget([
 		'options' => ['class' => 'navbar-nav navbar-right nav-list'],
-		'items' => [
-			['label' => 'События', 'url' => ['/events']],
-			['label' => 'Категории', 'url' => ['/channels/categories/default/index']],
-			Yii::$app->user->isGuest ?
-				['label' => 'Войти', 'url' => ['/site/login']] :
-				['label' => 'Выйти (' . Yii::$app->user->identity->username . ')',
-				 'url' => ['/site/logout'],
-				 'linkOptions' => ['data-method' => 'post']],
-		],
+		'items' => $items,
 	]);
     NavBar::end();
     // Site header
-    echo Yii::getAlias('@bower');
 	?>
-    <div class="jumbotron ">
+    <div class="jumbotron">
         <div class="row">
             <div class="col-lg-12">
                 <div class="brand">
