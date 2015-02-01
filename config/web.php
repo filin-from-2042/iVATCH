@@ -35,6 +35,41 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
+        'assetManager' => [
+            // some how preserve css cache. Remove in production
+            'linkAssets' => true,
+        ],
+        'authClientCollection' => [
+            'class' => 'yii\authclient\Collection',
+            'clients' => [
+                'google' => [
+                    'class' => 'yii\authclient\clients\GoogleOpenId'
+                ],
+                'facebook' => [
+                    'class' => 'yii\authclient\clients\Facebook',
+                    'clientId' => 'facebook_client_id',
+                    'clientSecret' => 'facebook_client_secret',
+                ],
+                'github' => [
+                    'class' => 'yii\authclient\clients\GitHub',
+                ],
+                'LinkedIn' => [
+                    'class' => 'yii\authclient\clients\LinkedIn',
+                ],
+                'Live' => [
+                    'class' => 'yii\authclient\clients\Live',
+                ],
+                'Twitter' => [
+                    'class' => 'yii\authclient\clients\Twitter',
+                ],
+                'Vkontakte' => [
+                    'class' => 'yii\authclient\clients\Vkontakte',
+                ],
+                'Yandex' => [
+                    'class' => 'yii\authclient\clients\YandexOAuth',
+                ],
+            ],
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'LtZwZbAL1Z0syBA-QaGdbP0xHQToujhn',

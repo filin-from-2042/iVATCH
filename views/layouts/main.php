@@ -37,10 +37,14 @@ AppAsset::register($this);
 		['label' => 'About', 'url' => ['/site/about']],
 		['label' => 'Contact', 'url' => ['/site/contact']],
 	];
-	if (Yii::$app->user->isGuest) $items[]=  ['label' => 'Login', 'url' => ['/site/login']];
+	if (Yii::$app->user->isGuest)
+    {
+        $items[]=  ['label' => 'Login', 'url' => ['/site/login']];
+        $items[]=  ['label' => 'Register', 'url' => ['/users/registration']];
+    }
 	else
 	{
-		$items[]=['label' => 'Profile', 'url' => ['/users/registration/default/user']];
+		$items[]=['label' => 'Profile', 'url' => 'index.php?r=users/default/view&username='. Yii::$app->user->identity->username .''];
 		$items[]=['label' => 'Logout (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'],  'linkOptions' => ['data-method' => 'post']];
 	}
 	echo Nav::widget([

@@ -1,0 +1,74 @@
+/**-------------------------- file with styles for user module only -------------------------------------*/
+
+/* User page */
+
+.user-info{
+    /*padding:0;*/
+    /*display: table;*/
+}
+
+.user-info .row{
+    /*display: table-row;*/
+}
+
+.user-info #user-links{
+    /*display: table-cell;*/
+    /*float: none;*/
+}
+
+.user-info #user-about, .user-info #user-message, .user-info #user-socials, .user-info #user-subscribes, .user-info #user-image {
+    /*display: table-cell;*/
+    /*float: none;*/
+    /*vertical-align: top;*/
+    text-align: center;
+    background: #31353d;
+    background-origin: content-box;
+}
+
+.user-button{
+    /*background: #31353d;*/
+    /*background-origin: content-box;*/
+}
+
+
+
+.user-info h3{
+    color: white;
+}
+
+.user-info .glyphicon {
+    font-size: 42px;
+    text-align: center;
+    display: block;
+    color: #f53d54;
+    margin-top: 10px;
+}
+
+/*-------------------------- MEDIA -------------------------*/
+
+@media (min-width: 1200px) {
+    .user-info #user-about, .user-info #user-message, .user-info #user-socials, .user-info #user-subscribes, .user-info #user-image{
+        margin-bottom: 18.5px;
+    }
+    .user-info #user-image{
+        background: none;
+    }
+
+}
+
+@media (min-width: 992px ) and (max-width: 1200px ){
+    .user-info #user-links  {
+        padding: 0;
+    }
+
+    .user-info #user-image{
+        padding: 20px;
+    }
+}
+
+@media (max-width: 992px ) {
+    .user-info #user-about, .user-info #user-message, .user-info #user-socials, .user-info #user-subscribes, .user-info #user-image{
+        margin-bottom: 18.5px;
+    }
+    
+}

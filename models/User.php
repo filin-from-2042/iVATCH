@@ -3,38 +3,74 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
+use yii\helpers\Security;
+use yii\web\IdentityInterface;
+use app\modules\images\models\Images;
 
-class User extends ActiveRecord implements \yii\web\IdentityInterface
+class User extends ActiveRecord implements IdentityInterface
 {
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
-
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
+    public $password_repeat;
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'users';
+    }
 
     /**
      * @inheritdoc
      */
+    public function rules()
+    {
+        return [
+            [['username','email'], 'unique'],
+            [['username','email','password','password_repeat'], 'required'],
+            [['verified', 'banned', 'send_to_email', 'send_newsletter'], 'boolean'],
+            [['login_type'], 'string'],
+            [['login_id', 'image_id'], 'integer'],
+            [['last_visit_timestamp', 'registration_timestamp'], 'safe'],
+            [['wallet'], 'number'],
+            [['username', 'password', 'email'], 'string', 'max' => 100],
+            [['registration_ip', 'last_logged_ip'], 'string', 'max' => 20],
+            [['currency'], 'string', 'max' => 2],
+            ['password_repeat', 'compare', 'compareAttribute' => 'password' ],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => \Yii::t('app', 'ID'),
+            'username' => \Yii::t('app', 'Username'),
+            'password' => \Yii::t('app', 'Password'),
+            'email' => \Yii::t('app', 'Email'),
+            'verified' => \Yii::t('app', 'Verified'),
+            'banned' => \Yii::t('app', 'Banned'),
+            'login_type' => \Yii::t('app', 'Login Type'),
+            'login_id' => \Yii::t('app', 'Login ID'),
+            'send_to_email' => \Yii::t('app', 'Send To Email'),
+            'send_newsletter' => \Yii::t('app', 'Send Newsletter'),
+            'last_visit_timestamp' => \Yii::t('app', 'Last Visit Timestamp'),
+            'registration_timestamp' => \Yii::t('app', 'Registration Timestamp'),
+            'registration_ip' => \Yii::t('app', 'Registration Ip'),
+            'last_logged_ip' => \Yii::t('app', 'Last Logged Ip'),
+            'wallet' => \Yii::t('app', 'Wallet'),
+            'currency' => \Yii::t('app', 'Currency'),
+            'image_id' => \Yii::t('app', 'Image ID'),
+        ];
+    }
+
+
+/**
+     * @inheritdoc
+     */
     public static function findIdentity($id)
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        return static::findOne($id);
     }
 
     /**
@@ -42,13 +78,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        return static::findOne(['access_token' => $token]);
     }
 
     /**
@@ -59,13 +89,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findByUsername($username)
     {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        return static::findOne(['username' => $username]);
     }
 
     /**
@@ -73,7 +97,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->getPrimaryKey();
     }
 
     /**
@@ -81,7 +105,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public function getAuthKey()
     {
-        return $this->authKey;
+        return $this->auth_key;
     }
 
     /**
@@ -89,7 +113,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public function validateAuthKey($authKey)
     {
-        return $this->authKey === $authKey;
+        return $this->getAuthKey() === $authKey;
     }
 
     /**
@@ -100,6 +124,54 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        return $this->password === ($password);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getChannels()
+    {
+        return $this->hasMany(Channels::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImages()
+    {
+        return $this->hasMany(Images::className(), ['uploader_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMessages()
+    {
+        return $this->hasMany(Messages::className(), ['to_user' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOptions()
+    {
+        return $this->hasMany(Options::className(), ['owner id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImage()
+    {
+        return $this->hasOne(Images::className(), ['id' => 'image_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers2channels()
+    {
+        return $this->hasMany(Users2channels::className(), ['user_id' => 'id']);
     }
 }
