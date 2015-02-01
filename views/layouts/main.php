@@ -25,30 +25,29 @@ AppAsset::register($this);
 <div class="wrap">
 	<?php
 	NavBar::begin([
-		'brandLabel' => false,
+		'brandLabel' => 'iva <span class="glyphicon glyphicon-facetime-video"></span>tch',
 		'brandUrl' => Yii::$app->homeUrl,
 		'options' => [
-			'class' => 'navbar-inverse navbar-fixed-top',
+			'class' => 'navbar-inverse navbar-fixed-top top-menu',
 		],
 	]);
-
 	echo Nav::widget([
-		'options' => ['class' => 'navbar-nav navbar-right'],
+		'options' => ['class' => 'navbar-nav navbar-right nav-list'],
 		'items' => [
-			['label' => 'Home', 'url' => ['/site/index']],
-			['label' => 'About', 'url' => ['/site/about']],
-			['label' => 'Contact', 'url' => ['/site/contact']],
+			['label' => 'События', 'url' => ['/events']],
+			['label' => 'Категории', 'url' => ['/channels/categories/default/index']],
 			Yii::$app->user->isGuest ?
-				['label' => 'Login', 'url' => ['/site/login']] :
-				['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+				['label' => 'Войти', 'url' => ['/site/login']] :
+				['label' => 'Выйти (' . Yii::$app->user->identity->username . ')',
 				 'url' => ['/site/logout'],
 				 'linkOptions' => ['data-method' => 'post']],
 		],
 	]);
     NavBar::end();
     // Site header
+    echo Yii::getAlias('@bower');
 	?>
-    <div class="jumbotron">
+    <div class="jumbotron ">
         <div class="row">
             <div class="col-lg-12">
                 <div class="brand">
