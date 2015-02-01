@@ -5,35 +5,37 @@ ol, ul {
 a {
     color: #f53d54;
 }
-/*------------------------------------- SITE HEADER ---------------------------------------*/
+/*--------------------------------------------------------- SITE HEADER ----------------------------------------------*/
 
 .jumbotron{
     background: url("../images/bg-header.jpg");
     margin-bottom: 0;
 }
 
-.brand {
+.jumbotron .brand {
     margin: 30px 0 30px;
     text-align: center;
     color: #ffffff;
 }
 
-
-.brand .wrap {
-display: inline-block;
-text-align: left;
+.jumbotron .brand .wrap {
+    display: inline-block;
+    text-align: left;
 }
 
-.brand h1 a {
+.jumbotron .brand h1 a,
+.top-menu .navbar-header a{
     display: block;
     text-transform: uppercase;
-    font: 600 116px/116px 'Open Sans', sans-serif;
     word-spacing: -9px;
     text-decoration: none;
     color: white;
 }
+.jumbotron .brand h1 a{
+    font: 600 116px/116px 'Open Sans', sans-serif;
+}
 
-.brand .slogan {
+.jumbotron .brand .slogan {
     display: block;
     margin-left: 5px;
     margin-top: -5px;
@@ -42,51 +44,50 @@ text-align: left;
     color: white;
 }
 
-.brand  .glyphicon.glyphicon-facetime-video{
+.jumbotron .brand  .glyphicon.glyphicon-facetime-video{
     font-size: 120px;
     top: 17px;
     right: 10px;
     color: #f53d54;
 }
 
-/*---------------------- BRAND MEDIA ---------------------*/
-
-@media (max-width: 767px) and (min-width: 480px) {
-    .brand h1 a {
-        font-size: 65px;
-    }
-    .brand .glyphicon.glyphicon-facetime-video{
-        font-size: 75px;
-        top: 14px;
-        right: 3px;
-    }
-    .brand .slogan {
-        margin-left: -2px;
-        margin-top: -33px;
-        font: 300 18px/18px 'Open Sans', sans-serif;
-    }
+       /* ----------------------------------------------- TOP MENU ---------------------------------------------------*/
+ .top-menu{
+     border:none;
+ }
+.top-menu .container{
+    width: 100%;
+    padding: 0;
+    background-color: #31353D;
 }
-
-
-@media (max-width: 479px) {
-    .brand h1 a {
-        font-size: 42px;
-    }
-
-    .brand .glyphicon.glyphicon-facetime-video {
-        font-size: 48px;
-        top: 9px;
-        right: 0;
-    }
-    .brand .slogan {
-        margin-left: 0;
-        margin-top: -37px;
-        font: 300 14px/0 'Open Sans', sans-serif;
-    }
+.top-menu .nav-list{
+    width: 80%;
+    margin: 0;
+    text-align: center;
+}
+.top-menu .nav-list li:hover,
+.top-menu .nav-list li.active a{
+    background-color: #f53d54;
+}
+.top-menu .nav-list li{
+    width: 33%;
+}
+.top-menu .nav-list li a{
+    color: #ffffff;
+}
+.top-menu .navbar-header a{
 
 }
-
-/*-------------------------- FOOTER ---------------------------*/
+.top-menu .navbar-header .navbar-brand{
+    margin-left: 0;
+}
+.top-menu .navbar-header .glyphicon.glyphicon-facetime-video{
+    top: 2px;
+    margin-left:7px;
+    margin-right:2px;
+    color: #f53d54;
+}
+/*--------------------------------------------------------- FOOTER ---------------------------------------------------*/
 footer {
     background: #31353d;
     padding: 95px 0 95px;
@@ -140,35 +141,7 @@ footer .footer_description{
     left: 40px;
 }
 
-
-/*---------------- FOOTER MEDIA --------------*/
-
-@media (max-width: 767px) {
-    .footer_description {
-        display: inline-block;
-        text-align: left;
-        padding-bottom: 40px;
-    }
-
-
-    footer .social-list {
-        margin: -35px 0 35px 0;
-    }
-}
-
-@media (max-width: 767px) and (min-width: 480px) {
-    footer .container{
-    }
-}
-
-
-@media (max-width: 479px) {
-    footer .container{
-    }
-
-}
-
-/*----------------------------- PARALLAX --------------------------*/
+/*------------------------------------------------------- PARALLAX ---------------------------------------------------*/
 
 #features {
     background: url(../images/home3.jpg) 50% 0 fixed;
@@ -196,4 +169,51 @@ footer .footer_description{
     text-transform: uppercase;
     color: white;
     font: 700 80px/80px 'Open Sans', sans-serif;
+}
+
+/*-------------------------------------- MEDIA ------------------------------------------------------------------------*/
+
+@media (max-width: 767px) and (min-width: 480px) {
+    .brand h1 a {
+        font-size: 65px;
+    }
+    .brand .glyphicon.glyphicon-facetime-video{
+        font-size: 75px;
+        top: 14px;
+        right: 3px;
+    }
+    .brand .slogan {
+        margin-left: -2px;
+        margin-top: -33px;
+        font: 300 18px/18px 'Open Sans', sans-serif;
+    }
+
+    /*--------------------------------------------------- FOOTER ----------------------------------------------------*/
+    .footer_description {
+        display: inline-block;
+        text-align: left;
+        padding-bottom: 40px;
+    }
+    footer .social-list {
+        margin: -35px 0 35px 0;
+    }
+}
+
+
+@media (max-width: 479px) {
+    .brand h1 a {
+        font-size: 42px;
+    }
+
+    .brand .glyphicon.glyphicon-facetime-video {
+        font-size: 48px;
+        top: 9px;
+        right: 0;
+    }
+    .brand .slogan {
+        margin-left: 0;
+        margin-top: -37px;
+        font: 300 14px/0 'Open Sans', sans-serif;
+    }
+
 }
