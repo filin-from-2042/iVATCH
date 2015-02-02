@@ -34,7 +34,7 @@ AppAsset::register($this);
 	// Nav menu
 	$items = 	[
         ['label' => 'События', 'url' => ['/events']],
-        ['label' => 'Категории', 'url' => ['/channels/categories/default/index']]
+        ['label' => 'Категории', 'url' => ['/channels/categories']]
 	];
 	if (Yii::$app->user->isGuest)
     {

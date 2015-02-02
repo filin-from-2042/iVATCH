@@ -66,11 +66,13 @@ a {
     text-align: center;
 }
 .top-menu .nav-list li:hover,
-.top-menu .nav-list li.active a{
+.top-menu .nav-list li.active a,
+.top-menu .nav-list li.active a:hover,
+.top-menu .nav-list li.active a:focus{
     background-color: #f53d54;
 }
 .top-menu .nav-list li{
-    width: 33%;
+    width: 25%;
 }
 .top-menu .nav-list li a{
     color: #ffffff;
