@@ -60,6 +60,7 @@ a {
      border:none;
 	 font-family: "Open Sans";
 	 font-weight: bold;
+	 text-transform: uppercase;
  }
 .top-menu .container{
     width: 100%;
