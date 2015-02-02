@@ -5,7 +5,7 @@ namespace app\models;
 use yii\db\ActiveRecord;
 use yii\helpers\Security;
 use yii\web\IdentityInterface;
-use app\modules\images\models\Images;
+use app\modules\channels\models\Channels;
 
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -27,8 +27,8 @@ class User extends ActiveRecord implements IdentityInterface
             [['username','email'], 'unique'],
             [['username','email','password','password_repeat'], 'required'],
             [['verified', 'banned', 'send_to_email', 'send_newsletter'], 'boolean'],
-            [['login_type'], 'string'],
-            [['login_id', 'image_id'], 'integer'],
+            [['login_type', ['image_path']], 'string'],
+            ['login_id', 'integer'],
             [['last_visit_timestamp', 'registration_timestamp'], 'safe'],
             [['wallet'], 'number'],
             [['username', 'password', 'email'], 'string', 'max' => 100],
@@ -60,7 +60,7 @@ class User extends ActiveRecord implements IdentityInterface
             'last_logged_ip' => \Yii::t('app', 'Last Logged Ip'),
             'wallet' => \Yii::t('app', 'Wallet'),
             'currency' => \Yii::t('app', 'Currency'),
-            'image_id' => \Yii::t('app', 'Image ID'),
+            'image_path' => \Yii::t('app', 'Image Path'),
         ];
     }
 
@@ -159,13 +159,6 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasMany(Options::className(), ['owner id' => 'id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getImage()
-    {
-        return $this->hasOne(Images::className(), ['id' => 'image_id']);
-    }
 
     /**
      * @return \yii\db\ActiveQuery

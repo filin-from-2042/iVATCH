@@ -4,6 +4,7 @@ namespace app\modules\users\controllers;
 
 use yii\web\Controller;
 use app\models\User;
+use app\modules\channels\models\Channels;
 use yii\web\NotFoundHttpException;
 
 class DefaultController extends Controller
@@ -22,7 +23,7 @@ class DefaultController extends Controller
         }
         return $this->render('view', [
             'model' => $model,
-            'image' => $model->image->image_path,
+            'channels'=>$model->channels,
         ]);
 
     }

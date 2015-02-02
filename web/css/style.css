@@ -59,7 +59,7 @@ a {
  .top-menu{
      border:none;
 	 font-family: "Open Sans";
-	 font-weight: bold;
+	 /*font-weight: bold;*/
 	 text-transform: uppercase;
  }
 .top-menu .container{
@@ -228,4 +228,17 @@ footer .footer_description{
         font: 300 14px/0 'Open Sans', sans-serif;
     }
 
+}
+
+
+/*---------------------- DUMMY -----------------------------*/
+
+.dummy-image{
+    background: #31353d;
+    margin-top: 20px;
+}
+.dummy-title{
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
 }

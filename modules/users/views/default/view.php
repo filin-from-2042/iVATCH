@@ -1,27 +1,21 @@
 <?php
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use app\components\DummyImageWidget;
 use app\modules\users\UsersAsset;
+use app\components\UserChannelsWidget;
+
 UsersAsset::register($this);
 ?>
 <div class="Users-default-index">
     <h2>User profile</h2>
     <h1><?=$model['username']?></h1>
-    <?php $form = ActiveForm::begin([
-        'id' => 'login-form',
-        'options' => ['class' => 'form-horizontal'],
-        'fieldConfig' => [
-            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-            'labelOptions' => ['class' => 'col-lg-1 control-label'],
-        ],
-    ]); ?>
-
 
     <div class="container-fluid user-info">
         <div class="row">
-            <div class="col-lg-8 col-md-8 cl-sm-6 col-xs-12" id="user-image">
-                <?= $image?Html::img($image, ['alt'=>'some', 'class'=>'img-responsive']):'';?>
-            </div>
+<!--            // Display user pic of dummy-->
+                <div class="col-lg-8 col-md-8 cl-sm-6 col-xs-12" id="user-image">
+               <?=Html::img($model['image_path']?$model['image_path']:'/modules/users/images/default.jpg', ['alt'=>'some', 'class'=>'img-responsive']);?>
+                </div>
             <div class="col-lg-4 col-md-4 cl-sm-6 col-xs-12" id="user-links">
                 <div class="row" id="user-about">
                     <span class="glyphicon glyphicon-user"  aria-hidden="true"></span><h3>About</h3>
@@ -38,29 +32,12 @@ UsersAsset::register($this);
             </div>
         </div>
     </div>
-
-
-
-    <?= $form->field($model, 'username') ?>
-    <?= $form->field($model, 'wallet') ?>
-    <?= $form->field($model, 'currency') ?>
-    <?= $form->field($model, 'email') ?>
-
-    <?= $form->field($model, 'password')->passwordInput() ?>
-
-    <?= $form->field($model, 'banned', [
-        'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-    ])->checkbox() ?>
-    <?= $form->field($model, 'verified', [
-        'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-    ])->checkbox() ?>
-
-    <div class="form-group">
-        <div class="col-lg-offset-1 col-lg-11">
-            <?= Html::submitButton('Update', ['class' => 'btn btn-primary', 'name' => 'update-button']) ?>
-        </div>
-    </div>
-
-    <?php ActiveForm::end(); ?>
-
+    <h1>Achievements</h1>
+    <p>Coming soon</p>
+    <h1>Channels</h1>
+    <?
+    if ($channels)
+        echo UserChannelsWidget::widget(['dataProvider' =>  $channels]);
+    else {echo '<p> There are no channels yet!:(</p>';}
+    ?>
 </div>

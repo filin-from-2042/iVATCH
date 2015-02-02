@@ -44,6 +44,15 @@
     margin-top: 10px;
 }
 
+.user-info .dummy-image{
+
+}
+
+
+.single-channel .channel-title, .single-channel .channel-desc {
+    margin: 0;
+}
+
 /*-------------------------- MEDIA -------------------------*/
 
 @media (min-width: 1200px) {

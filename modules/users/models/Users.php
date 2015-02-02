@@ -1,7 +1,7 @@
 <?php
 
 namespace app\modules\users;
-
+use app\modules\channels\models\Channels;
 use Yii;
 
 /**
@@ -23,10 +23,9 @@ use Yii;
  * @property string $last_logged_ip
  * @property double $wallet
  * @property string $currency
- * @property integer $image_id
+ * @property integer $image_path
  *
  * @property Channels[] $channels
- * @property Images[] $images
  * @property Messages[] $messages
  * @property Options[] $options
  * @property Images $image
@@ -82,7 +81,7 @@ class Users extends \yii\db\ActiveRecord
             'last_logged_ip' => Yii::t('app', 'Last Logged Ip'),
             'wallet' => Yii::t('app', 'Wallet'),
             'currency' => Yii::t('app', 'Currency'),
-            'image_id' => Yii::t('app', 'Image ID'),
+            'image_path' => Yii::t('app', 'Path to image'),
         ];
     }
 
@@ -94,13 +93,6 @@ class Users extends \yii\db\ActiveRecord
         return $this->hasMany(Channels::className(), ['user_id' => 'id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getImages()
-    {
-        return $this->hasMany(Images::className(), ['uploader_id' => 'id']);
-    }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -118,13 +110,6 @@ class Users extends \yii\db\ActiveRecord
         return $this->hasMany(Options::className(), ['owner id' => 'id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getImage()
-    {
-        return $this->hasOne(Images::className(), ['id' => 'image_id']);
-    }
 
     /**
      * @return \yii\db\ActiveQuery

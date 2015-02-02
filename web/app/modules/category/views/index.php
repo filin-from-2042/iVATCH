@@ -4,41 +4,30 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\channels\models\ChannelSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Channels');
+$this->title = Yii::t('app', 'Categories');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="channels-index">
+<div class="categories-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a(Yii::t('app', 'Create {modelClass}', [
-    'modelClass' => 'Channels',
+    'modelClass' => 'Categories',
 ]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'user_id',
-            'title',
+            'name',
             'description',
-            'category_id',
-            // 'image_id',
-            // 'tariff_id',
-            // 'tariff_start',
-            // 'tariff_end',
-            // 'subscribers_count',
-            // 'subscribe_plan',
-            // 'subscription_cost',
+            'image',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
