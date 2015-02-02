@@ -1,4 +1,8 @@
 /*------------ GENERAL STYLES -------------*/
+@font-face {
+	font-family: "Open Sans";
+	src: url(../fonts/open-sans.ttf);
+}
 ol, ul {
     list-style: none;
 }
@@ -54,6 +58,8 @@ a {
        /* ----------------------------------------------- TOP MENU ---------------------------------------------------*/
  .top-menu{
      border:none;
+	 font-family: "Open Sans";
+	 font-weight: bold;
  }
 .top-menu .container{
     width: 100%;
@@ -76,6 +82,9 @@ a {
 }
 .top-menu .nav-list li a{
     color: #ffffff;
+}
+.top-menu .navbar-header {
+	margin-left: 5%;
 }
 .top-menu .navbar-header a{
 

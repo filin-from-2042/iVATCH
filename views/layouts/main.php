@@ -38,13 +38,13 @@ AppAsset::register($this);
 	];
 	if (Yii::$app->user->isGuest)
     {
-        $items[]=  ['label' => 'Login', 'url' => ['/site/login']];
-        $items[]=  ['label' => 'Register', 'url' => ['/users/registration']];
+        $items[]=  ['label' => 'Войти', 'url' => ['/site/login']];
+        $items[]=  ['label' => 'Зарегистрироваться', 'url' => ['/users/registration']];
     }
 	else
 	{
-		$items[]=['label' => 'Profile', 'url' => 'index.php?r=users/default/view&username='. Yii::$app->user->identity->username .''];
-		$items[]=['label' => 'Logout (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'],  'linkOptions' => ['data-method' => 'post']];
+		$items[]=['label' => 'Профиль', 'url' => 'index.php?r=users/default/view&username='. Yii::$app->user->identity->username .''];
+		$items[]=['label' => 'Выйти (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'],  'linkOptions' => ['data-method' => 'post']];
 	}
 	echo Nav::widget([
 		'options' => ['class' => 'navbar-nav navbar-right nav-list'],
@@ -72,7 +72,7 @@ AppAsset::register($this);
     <!--     Parralax-->
 <!--    <section id="features" data-speed="4" data-type="background">-->
 <!--        <div class="container">-->
-<!--<!--            Content-->-->
+<!--<!--            Content-->
 <!--            <div class="body-content">-->
 <!---->
 <!--                <div class="row">-->

@@ -51,4 +51,9 @@ class DefaultController extends Controller
         }
 
     }
+
+	public function getRoute()
+	{
+		return 'users/registration';
+	}
 }
