@@ -6,11 +6,13 @@ $this->title = 'iVATCH';
 
 echo Carousel::widget([
      'items' => [
-         '<img src="/web/images/car-1.jpg"/>',
-         '<img src="/web/images/car-2.jpg"/>',
-         '<img src="/web/images/car-3.jpg"/>',
-         '<img src="/web/images/car-4.jpg"/>',
-     ]
+         '<img src="/web/images/camera%20(1).jpg"/>',
+         '<img src="/web/images/camera%20(10).jpg"/>',
+         '<img src="/web/images/camera%20(12).jpg"/>',
+         '<img src="/web/images/camera%20(14).JPG"/>',
+     ],
+	'controls'=>['<span class="left_arrow glyphicon glyphicon-chevron-left"></span>','<span class="right_arrow glyphicon glyphicon-chevron-right"></span>'],
+	'options'=>['class'=>'slide']
  ]);
 
 ?>

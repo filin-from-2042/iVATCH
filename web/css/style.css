@@ -15,6 +15,7 @@ a {
     background: url("../images/bg-header.jpg");
     margin-bottom: 0;
     margin-top: 50px;
+	padding: 30px 15px;
 }
 
 .jumbotron .brand {
@@ -165,7 +166,9 @@ footer .footer_description{
     box-shadow: 0 0 50px rgba(0,0,0,0.8);
     padding: 150px 0;
 }
-
+#features .container{
+	width: 100%;
+}
 #features .single_feature {
     background: white;
     background-clip: content-box;
@@ -184,9 +187,25 @@ footer .footer_description{
     font: 700 80px/80px 'Open Sans', sans-serif;
 }
 
-/*-------------------------------------- MEDIA ------------------------------------------------------------------------*/
 
-@media (max-width: 767px) and (min-width: 480px) {
+/*---------------------- DUMMY -----------------------------*/
+
+.dummy-image{
+	background: #31353d;
+	margin-top: 20px;
+}
+.dummy-title{
+	text-align: center;
+	color: white;
+	text-transform: uppercase;
+}
+
+/*-------------------------------------- MEDIA ------------------------------------------------------------------------*/
+@media (min-width: 768px) and (max-width: 979px) {
+
+}
+
+@media (min-width: 480px) and (max-width: 767px){
     .brand h1 a {
         font-size: 65px;
     }
@@ -210,6 +229,13 @@ footer .footer_description{
     footer .social-list {
         margin: -35px 0 35px 0;
     }
+
+	.top-menu .nav-list{
+		width: 100%;
+	}
+	.top-menu .nav-list li{
+		width: 100%;
+	}
 }
 
 
@@ -229,17 +255,4 @@ footer .footer_description{
         font: 300 14px/0 'Open Sans', sans-serif;
     }
 
-}
-
-
-/*---------------------- DUMMY -----------------------------*/
-
-.dummy-image{
-    background: #31353d;
-    margin-top: 20px;
-}
-.dummy-title{
-    text-align: center;
-    color: white;
-    text-transform: uppercase;
 }
