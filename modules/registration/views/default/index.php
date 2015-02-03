@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use app\modules\registration\RegistrationAsset;
-//RegistrationAsset::register($this);
+RegistrationAsset::register($this);
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */

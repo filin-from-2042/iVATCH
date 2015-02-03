@@ -27,7 +27,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['username','email'], 'unique'],
             [['username','email','password','password_repeat'], 'required'],
             [['verified', 'banned', 'send_to_email', 'send_newsletter'], 'boolean'],
-            [['login_type', ['image_path']], 'string'],
+            [['login_type', 'image_path'], 'string'],
             ['login_id', 'integer'],
             [['last_visit_timestamp', 'registration_timestamp'], 'safe'],
             [['wallet'], 'number'],
@@ -135,13 +135,7 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasMany(Channels::className(), ['user_id' => 'id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getImages()
-    {
-        return $this->hasMany(Images::className(), ['uploader_id' => 'id']);
-    }
+
 
     /**
      * @return \yii\db\ActiveQuery

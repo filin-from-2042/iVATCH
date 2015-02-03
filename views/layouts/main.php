@@ -58,32 +58,11 @@ AppAsset::register($this);
     <!--JUMBOTRON-->
     <?= $this->render('jumbotron');?>
 
-    <!--PARRALAX-->
-    <?//=$this->render('parallax')?>
-
-
-<!--	<div class="container">-->
-<!--        <!--BREADCRUMBS-->
-<!--		--><?//= Breadcrumbs::widget([
-//			'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-//		]) ?>
-<!---->
-<!--        <!--CONTENT-->
-<!--		--><?//= $content ?>
-<!---->
-<!--	</div>-->
-
-    <section id="features" data-speed="4" data-type="background">
-        <div class="container">
-            <div class="body-content">
-                <div class="row">
-                    <?= $content ?>
-                </div>
-
-            </div>
+    <div class="container">
+        <div class="row">
+            <?= $content ?>
         </div>
-    </section>
-
+    </div>
 
 </div>
 
