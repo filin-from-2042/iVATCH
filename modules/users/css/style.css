@@ -16,13 +16,17 @@
     /*float: none;*/
 }
 
-.user-info #user-about, .user-info #user-message, .user-info #user-socials, .user-info #user-subscribes, .user-info #user-image {
-    /*display: table-cell;*/
-    /*float: none;*/
-    /*vertical-align: top;*/
+.user-info #user-about, .user-info #user-message, .user-info #user-socials, .user-info #user-subscribes {
     text-align: center;
     background: #31353d;
     background-origin: content-box;
+	border-bottom: 4px solid #f53d54;
+}
+
+.user-info #user-image{
+	text-align: center;
+	background: #31353d;
+	background-origin: content-box;
 }
 
 .user-button{
@@ -40,7 +44,7 @@
     font-size: 42px;
     text-align: center;
     display: block;
-    color: #f53d54;
+    color: white;
     margin-top: 10px;
 }
 
@@ -52,6 +56,9 @@
 .single-channel .channel-title, .single-channel .channel-desc {
     margin: 0;
 }
+#user-links div:hover{
+	background: #f53d54;
+}
 
 /*-------------------------- MEDIA -------------------------*/
 
@@ -60,7 +67,8 @@
         margin-bottom: 18.5px;
     }
     .user-info #user-image{
-        background: none;
+		background: none;
+		padding: 0 23px 0 0;
     }
 
 }
@@ -71,7 +79,7 @@
     }
 
     .user-info #user-image{
-        padding: 20px;
+        padding: 2px;
     }
 }
 
