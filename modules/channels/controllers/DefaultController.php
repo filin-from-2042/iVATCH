@@ -26,6 +26,18 @@ class DefaultController extends Controller
         ];
     }
 
+    public function actionBrowseByTitle($title)
+    {
+        // Get user by nickname
+        $model = Channels::findByTitle($title);
+        if ($model === null) {
+            throw new NotFoundHttpException;
+        }
+        return $this->render('index', [
+            'dataProvider' => $model,
+        ]);
+    }
+
     /**
      * Lists all Channels models.
      * @return mixed

@@ -81,7 +81,7 @@ class Channels extends \yii\db\ActiveRecord
      * @param  string      $title
      * @return static|null
      */
-    public static function findByUsername($title)
+    public static function findByTitle($title)
     {
         return static::findOne(['title' => $title]);
     }

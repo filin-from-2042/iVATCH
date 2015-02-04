@@ -4,7 +4,7 @@ $params = require(__DIR__ . '/params.php');
 
 $config = [
     'id' => 'basic',
-    'name' => 'iVATCH',
+    'name' => 'UVATCH',
     'modules' => [
 
         'channels' => [

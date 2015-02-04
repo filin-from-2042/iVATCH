@@ -2,7 +2,7 @@
 /* @var $this yii\web\View */
 use yii\bootstrap\Carousel;
 
-$this->title = 'iVATCH';
+$this->title = 'UVATCH';
 ?>
 
 <section id="features" data-speed="4" data-type="background">

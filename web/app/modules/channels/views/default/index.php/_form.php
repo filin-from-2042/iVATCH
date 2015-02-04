@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'category_id')->textInput() ?>
 
-    <?= $form->field($model, 'image_id')->textInput() ?>
+    <?= $form->field($model, 'image_path')->textInput() ?>
 
     <?= $form->field($model, 'tariff_id')->textInput() ?>
 

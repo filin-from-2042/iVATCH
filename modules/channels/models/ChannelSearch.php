@@ -18,8 +18,8 @@ class ChannelSearch extends Channels
     public function rules()
     {
         return [
-            [['id', 'user_id', 'category_id', 'image_id', 'tariff_id', 'subscribers_count'], 'integer'],
-            [['title', 'description', 'tariff_start', 'tariff_end', 'subscribe_plan'], 'safe'],
+            [['id', 'user_id', 'category_id',  'tariff_id', 'subscribers_count'], 'integer'],
+            [['title', 'description', 'tariff_start', 'tariff_end', 'subscribe_plan', 'image_path'], 'safe'],
             [['subscription_cost'], 'number'],
         ];
     }
@@ -60,7 +60,7 @@ class ChannelSearch extends Channels
             'id' => $this->id,
             'user_id' => $this->user_id,
             'category_id' => $this->category_id,
-            'image_id' => $this->image_id,
+            'image_path' => $this->image_path,
             'tariff_id' => $this->tariff_id,
             'tariff_start' => $this->tariff_start,
             'tariff_end' => $this->tariff_end,
