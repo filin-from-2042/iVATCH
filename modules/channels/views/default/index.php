@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\modules\channels\ChannelsAsset;
+ChannelsAsset::register($this);
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\channels\models\ChannelSearch */
@@ -20,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'modelClass' => 'Channels',
 ]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
+<!--
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -43,5 +45,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+-->
 
+
+    <video autoplay></video>
 </div>
