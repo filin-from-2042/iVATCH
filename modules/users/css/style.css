@@ -27,6 +27,7 @@
 	text-align: center;
 	background: #31353d;
 	background-origin: content-box;
+    position: relative;
 }
 
 .user-button{
@@ -58,6 +59,17 @@
 }
 #user-links div:hover{
 	background: #f53d54;
+}
+
+/*------------- AVATAR ----------------*/
+
+.user-info .image_tooltip{
+    position: absolute;
+    background-color: rgb(51, 51, 51);
+}
+
+.user-info .image_tooltip h3{
+    color: #000000;
 }
 
 /*-------------------------- MEDIA -------------------------*/

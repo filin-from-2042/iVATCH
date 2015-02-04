@@ -13,6 +13,8 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
+
+
     public static function tableName()
     {
         return 'users';
@@ -25,7 +27,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             [['username','email'], 'unique'],
-            [['username','email','password','password_repeat'], 'required'],
+            [['username','email','password'], 'required'],
             [['verified', 'banned', 'send_to_email', 'send_newsletter'], 'boolean'],
             [['login_type', 'image_path'], 'string'],
             ['login_id', 'integer'],
@@ -34,7 +36,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['username', 'password', 'email'], 'string', 'max' => 100],
             [['registration_ip', 'last_logged_ip'], 'string', 'max' => 20],
             [['currency'], 'string', 'max' => 2],
-            ['password_repeat', 'compare', 'compareAttribute' => 'password' ],
+//            ['password_repeat', 'compare', 'compareAttribute' => 'password'  ],
         ];
     }
 

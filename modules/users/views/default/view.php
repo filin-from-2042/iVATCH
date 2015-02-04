@@ -1,8 +1,8 @@
 <?php
 use yii\helpers\Html;
-use app\components\DummyImageWidget;
 use app\modules\users\UsersAsset;
 use app\components\UserChannelsWidget;
+use yii\bootstrap\ActiveForm;
 
 UsersAsset::register($this);
 ?>
@@ -14,7 +14,13 @@ UsersAsset::register($this);
         <div class="row">
 <!--            // Display user pic of dummy-->
                 <div class="col-lg-8 col-md-8 cl-sm-6 col-xs-12" id="user-image">
-               <?=Html::img($model['image_path']?$model['image_path']:'/modules/users/images/default.jpg', ['alt'=>'some', 'class'=>'img-responsive']);?>
+               <?=Html::img($model['image_path']?$model['image_path']:'/modules/users/images/default.jpg', ['alt'=>'default-avatar', 'class'=>'img-responsive']);?>
+                   <div class="user-image-upload">
+                       <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+                        <?= $form->field($model, 'image_path')->fileInput() ?>
+                       <button>Submit</button>
+                       <?php ActiveForm::end(); ?>
+                   </div>
                 </div>
             <div class="col-lg-4 col-md-4 cl-sm-6 col-xs-12" id="user-links">
                 <div class="row" id="user-about">

@@ -49,8 +49,8 @@ class Users extends \yii\db\ActiveRecord
         return [
             [['username'], 'required'],
             [['verified', 'banned', 'send_to_email', 'send_newsletter'], 'boolean'],
-            [['login_type'], 'string'],
-            [['login_id', 'image_path'], 'integer'],
+            [['login_type', 'image_path'], 'string'],
+            [['login_id'], 'integer'],
             [['last_visit_timestamp', 'registration_timestamp'], 'safe'],
             [['wallet'], 'number'],
             [['username', 'password', 'email'], 'string', 'max' => 100],
