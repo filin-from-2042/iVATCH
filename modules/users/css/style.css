@@ -69,8 +69,14 @@
 }
 
 .user-info .image_tooltip h3{
-    color: #000000;
+    color: #ffffff;
 }
+
+.user-info .wrapper_block{
+    position: relative;
+}
+
+
 
 /*-------------------------- MEDIA -------------------------*/
 
@@ -81,6 +87,9 @@
     .user-info #user-image{
 		background: none;
 		padding: 0 23px 0 0;
+    }
+    .user-info .image_tooltip {
+        margin-top: -57px ;
     }
 
 }

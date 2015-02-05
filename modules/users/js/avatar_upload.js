@@ -7,16 +7,11 @@ jQuery( document ).ready(function() {
 
 function AvatarHover()
 {
-    //$('body').undelegate('#user-image img','hover');
-    //$('body').delegate('#user-image img','hover',function() {
-    //    console.log(11);
-    //        $(this).after('<div class="image_tooltip col-lg-12">Upload Image</div>');
-    //});
     $( "#user-image img" ).hover(
         function() {
-            $( this ).append('<div class="image_tooltip col-lg-12"><h3>Upload Image</h3></div>');
+            $( this ).next().fadeIn();
         }, function() {
-            //$( this ).next().remove();
+            $( this ).next().fadeOut();
         }
     );
 }

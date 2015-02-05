@@ -11,6 +11,7 @@ use yii\web\UploadedFile;
 use Yii;
 use yii\imagine\Image;
 
+
 class DefaultController extends Controller
 {
     public function actionIndex()
@@ -35,10 +36,8 @@ class DefaultController extends Controller
                 $model->image_path =  $save_path;
                 $file->saveAs(Yii::getAlias('@app').$save_path);
                 $model->save('image_path');
-
-				Image::frame(Yii::getAlias('@app').$save_path, 5, '666', 0)
-					->rotate(-8)
-					->save(Yii::getAlias('@app').$save_path, ['quality' => 50]);
+				Image::thumbnail(Yii::getAlias('@app').$save_path, 1000,667)
+                     ->save(Yii::getAlias('@app').$save_path, ['quality' => 80]);
             }
         }
 

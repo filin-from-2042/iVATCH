@@ -15,7 +15,7 @@ class UsersAsset extends AssetBundle
     ];
     public $js = [
         'js/avatar_upload.js',
-        '@bower/jquery/dist'
+//        '@bower/jquery/dist'
     ];
     public $depends = [
     'yii\web\YiiAsset',

@@ -14,7 +14,10 @@ UsersAsset::register($this);
         <div class="row">
 <!--            // Display user pic of dummy-->
                 <div class="col-lg-8 col-md-8 cl-sm-6 col-xs-12" id="user-image">
-               <?=Html::img($model['image_path']?$model['image_path']:'/modules/users/images/default.jpg', ['alt'=>'default-avatar', 'class'=>'img-responsive']);?>
+                   <div class="wrapper_block">
+                        <?=Html::img($model['image_path']?$model['image_path']:'/modules/users/images/default.jpg', ['alt'=>'default-avatar', 'class'=>'img-responsive']);?>
+                        <div class="image_tooltip col-lg-12"><h3>Upload Image</h3></div>
+                   </div>
                    <div class="user-image-upload">
                        <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
                         <?= $form->field($model, 'image_path')->fileInput() ?>
