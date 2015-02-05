@@ -9,6 +9,7 @@ use app\modules\channels\models\Channels;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 use Yii;
+use yii\imagine\Image;
 
 class DefaultController extends Controller
 {
@@ -34,6 +35,10 @@ class DefaultController extends Controller
                 $model->image_path =  $save_path;
                 $file->saveAs(Yii::getAlias('@app').$save_path);
                 $model->save('image_path');
+
+				Image::frame(Yii::getAlias('@app').$save_path, 5, '666', 0)
+					->rotate(-8)
+					->save(Yii::getAlias('@app').$save_path, ['quality' => 50]);
             }
         }
 

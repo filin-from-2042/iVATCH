@@ -57,13 +57,22 @@ return array (
       '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker',
     ),
   ),
-    'yiisoft/authclient' =>
-        array (
-            'name' => 'yiisoft/authclient',
-            'version' => '2.0.2.0',
-            'alias' =>
-                array (
-                    '@yii/authclient' => $vendorDir . '/yiisoft/authclient',
-                ),
-        ),
+  'yiisoft/authclient' => 
+  array (
+    'name' => 'yiisoft/authclient',
+    'version' => '2.0.2.0',
+    'alias' => 
+    array (
+      '@yii/authclient' => $vendorDir . '/yiisoft/authclient',
+    ),
+  ),
+  'yiisoft/yii2-imagine' => 
+  array (
+    'name' => 'yiisoft/yii2-imagine',
+    'version' => '2.0.2.0',
+    'alias' => 
+    array (
+      '@yii/imagine' => $vendorDir . '/yiisoft/yii2-imagine',
+    ),
+  ),
 );
