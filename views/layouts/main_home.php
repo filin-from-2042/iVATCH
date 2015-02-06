@@ -27,7 +27,7 @@ AppAsset::register($this);
     <!--TOP MENU-->
     <?php
     NavBar::begin([
-        'brandLabel' => 'iva <span class="glyphicon glyphicon-facetime-video"></span>tch',
+        'brandLabel' => 'uva <span class="glyphicon glyphicon-facetime-video"></span>tch',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top top-menu',
