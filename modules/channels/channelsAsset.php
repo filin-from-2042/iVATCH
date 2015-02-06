@@ -5,8 +5,8 @@ use yii\web\AssetBundle;
 
 class ChannelsAsset extends AssetBundle
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
+//    public $basePath = '@webroot';
+//    public $baseUrl = '@web';
     public $sourcePath = '@app/modules/channels/';
 //    public $css = [
 //        'css/style.css'

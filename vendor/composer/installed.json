@@ -85,8 +85,7 @@
             {
                 "name": "Edward Z. Yang",
                 "email": "admin@htmlpurifier.org",
-                "homepage": "http://ezyang.com",
-                "role": "Developer"
+                "homepage": "http://ezyang.com"
             }
         ],
         "description": "Standards compliant HTML filter written in PHP",
@@ -258,17 +257,17 @@
     },
     {
         "name": "bower-asset/jquery.inputmask",
-        "version": "3.1.53",
-        "version_normalized": "3.1.53.0",
+        "version": "3.1.61",
+        "version_normalized": "3.1.61.0",
         "source": {
             "type": "git",
             "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
-            "reference": "1a863a0c9b733444f6766e5500eaf79b7b1d1d03"
+            "reference": "f2c086411d2557fc485c47afb3cecfa6c1de9ee2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/1a863a0c9b733444f6766e5500eaf79b7b1d1d03",
-            "reference": "1a863a0c9b733444f6766e5500eaf79b7b1d1d03",
+            "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/f2c086411d2557fc485c47afb3cecfa6c1de9ee2",
+            "reference": "f2c086411d2557fc485c47afb3cecfa6c1de9ee2",
             "shasum": ""
         },
         "require": {
@@ -305,7 +304,7 @@
             "form",
             "input",
             "inputmask",
-            "jQuery",
+            "jquery",
             "mask",
             "plugins"
         ]
@@ -564,17 +563,17 @@
     },
     {
         "name": "bower-asset/bootstrap",
-        "version": "v3.3.1",
-        "version_normalized": "3.3.1.0",
+        "version": "v3.3.2",
+        "version_normalized": "3.3.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/twbs/bootstrap.git",
-            "reference": "9a7e365c2c4360335d25246dac11afb1f577210a"
+            "reference": "bcf7dd38b5ab180256e2e4fb5da0369551b3f082"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/twbs/bootstrap/zipball/9a7e365c2c4360335d25246dac11afb1f577210a",
-            "reference": "9a7e365c2c4360335d25246dac11afb1f577210a",
+            "url": "https://api.github.com/repos/twbs/bootstrap/zipball/bcf7dd38b5ab180256e2e4fb5da0369551b3f082",
+            "reference": "bcf7dd38b5ab180256e2e4fb5da0369551b3f082",
             "shasum": ""
         },
         "require": {
@@ -731,9 +730,9 @@
             "bower-asset/jquery": ">=1.7"
         },
         "require-dev": {
-            "bower-asset/jasmine-ajax": ">=1.3.1,<1.4",
-            "bower-asset/jasmine-jquery": ">=1.5.2,<1.6",
-            "bower-asset/jquery": ">=1.7,<1.8"
+            "bower-asset/jasmine-ajax": "~1.3.1",
+            "bower-asset/jasmine-jquery": "~1.5.2",
+            "bower-asset/jquery": "~1.7"
         },
         "type": "bower-asset-library",
         "extra": {
