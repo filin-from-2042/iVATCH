@@ -2,18 +2,31 @@ jQuery( document ).ready(function() {
 
     AvatarUploadEvent();
     AvatarHover();
+    AvatarClicked();
 });
 
 
 function AvatarHover()
 {
-    $( "#user-image img" ).hover(
+    $( ".wrapper_block" ).hover(
         function() {
-            $( this ).next().fadeIn();
-        }, function() {
-            $( this ).next().fadeOut();
+            $( this ).find('.image_tooltip').fadeIn();
+        }, function()
+        {
+            $( this ).find('.image_tooltip').fadeOut();
         }
     );
+}
+
+function AvatarClicked()
+{
+    $('body').undelegate('.image_tooltip','click');
+    $('body').delegate('.image_tooltip','click',function()
+    {
+        var domThis = $(this);
+       domThis.closest('#user-image').find('#user-image_path').click();
+        console.log( domThis.closest('#user-image').find('#user-image_path'))
+    });
 }
 
 function AvatarUploadEvent()

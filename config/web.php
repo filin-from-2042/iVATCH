@@ -38,7 +38,7 @@ $config = [
     'components' => [
         'assetManager' => [
             // some how preserve css cache. Remove in production
-            'linkAssets' => true,
+//            'linkAssets' => true,
         ],
         'authClientCollection' => [
             'class' => 'yii\authclient\Collection',
