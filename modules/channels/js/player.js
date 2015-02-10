@@ -1,44 +1,28 @@
-navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
-navigator.getUserMedia({ audio: true, video: false }, gotStream, streamError);
+var isInitiator;
 
-function gotStream(stream) {
-    document.querySelector('video').src = URL.createObjectURL(stream);
-	document.getElementById("callButton").style.display = 'inline-block';
-	document.getElementById("localVideo").src = URL.createObjectURL(stream);
+room = prompt("Enter room name:");
 
-	pc = new PeerConnection(null);
-	pc.addStream(stream);
-	pc.onicecandidate = gotIceCandidate;
-	pc.onaddstream = gotRemoteStream;
+var socket = io.connect();
+
+if (room !== "") {
+	console.log('Joining room ' + room);
+	socket.emit('create or join', room);
 }
 
-function streamError(error) {
-    console.log(error);
-}
+socket.on('full', function (room){
+	console.log('Room ' + room + ' is full');
+});
 
-function createOffer() {
-	pc.createOffer(
-		gotLocalDescription,
-		function(error) { console.log(error) },
-		{ 'mandatory': { 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true } }
-	);
-}
+socket.on('empty', function (room){
+	isInitiator = true;
+	console.log('Room ' + room + ' is empty');
+});
 
-function createAnswer() {
-	pc.createAnswer(
-		gotLocalDescription,
-		function(error) { console.log(error) },
-		{ 'mandatory': { 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true } }
-	);
-}
+socket.on('join', function (room){
+	console.log('Making request to join room ' + room);
+	console.log('You are the initiator!');
+});
 
-function gotIceCandidate(event){
-	if (event.candidate) {
-		sendMessage({
-			type: 'candidate',
-			label: event.candidate.sdpMLineIndex,
-			id: event.candidate.sdpMid,
-			candidate: event.candidate.candidate
-		});
-	}
-}
+socket.on('log', function (array){
+	console.log.apply(console, array);
+});

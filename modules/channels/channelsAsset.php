@@ -12,6 +12,7 @@ class ChannelsAsset extends AssetBundle
 //        'css/style.css'
 //    ];
     public $js = [
+        'js/lib/adapter.js',
         'js/player.js'
     ];
     public $depends = [

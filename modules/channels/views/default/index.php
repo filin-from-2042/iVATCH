@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use app\modules\channels\ChannelsAsset;
+$this->registerJSFile('https://cdn.socket.io/socket.io-1.3.3.js');
 ChannelsAsset::register($this);
-
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\channels\models\ChannelSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
