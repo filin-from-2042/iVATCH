@@ -12,12 +12,12 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
-        $model = new User();
+        $model = new RegistrationForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $login = new LoginForm();
-            $login->username = $_POST['User']['username'];
-            $login->password = $_POST['User']['password'];
+            $login->username = $_POST['RegistrationForm']['username'];
+            $login->password = $_POST['RegistrationForm']['password'];
             $login->Login();
             return $this->redirect('index.php?r=users/default/view&username='. Yii::$app->user->identity->username .'');
         } else {

@@ -65,18 +65,35 @@
 
 .user-info .image_tooltip{
     position: absolute;
-    background-color: rgb(51, 51, 51);
+    background-color: rgba(51, 51, 51, 0.5);
 }
 
 .user-info .image_tooltip h3{
     color: #ffffff;
+    display: inline-block;
+    padding-left: 20px;
 }
 
 .user-info .wrapper_block{
     position: relative;
 }
 
+.user-info .image_tooltip {
+    display: none;
+    cursor:pointer;
+}
+.user-info .image_tooltip:hover {
+    display: block;
+}
 
+.user-info .image_tooltip span{
+    display: inline-block;
+    font-size: 24px;
+}
+
+.user-info .user-image-upload{
+    display: none;
+}
 
 /*-------------------------- MEDIA -------------------------*/
 
