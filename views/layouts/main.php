@@ -4,6 +4,8 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\bootstrap\Modal;
+use app\controllers\SiteController;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -40,6 +42,8 @@ AppAsset::register($this);
 	];
 	if (Yii::$app->user->isGuest)
     {
+
+        $items[]=   '<li><a data-toggle="modal" data-target="#modal" style="cursor: pointer;">Log in</a></li>';
         $items[]=  ['label' => 'Войти', 'url' => ['/site/login']];
         $items[]=  ['label' => 'Зарегистрироваться', 'url' => ['/users/registration']];
     }
@@ -53,7 +57,17 @@ AppAsset::register($this);
 		'items' => $items,
 	]);
     NavBar::end();
+
+
+    Modal::begin(['id' => 'modal',
+        'header' => '<h1>Log in</h1>'   ]);
+        $modelLogin = new \app\models\LoginForm();
+        echo $this->render('@app/views/site/login', ['model'=>$modelLogin]);
+
+    Modal::end();
 	?>
+
+
 
     <!--JUMBOTRON-->
     <?= $this->render('jumbotron');?>

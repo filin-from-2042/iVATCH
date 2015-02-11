@@ -10,6 +10,7 @@ RegistrationAsset::register($this);
 
 $this->title = 'Register';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
 <div class="row">
@@ -42,44 +43,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?php ActiveForm::end(); ?>
     </div>
-<!--    Block with socials -->
+    <!--    Block with socials -->
     <div class="col-lg-6  col-md-6  col-sm-6  col-xs-12 " id="register-socials">
         <h1>Or join with social network</h1>
-<!--        <div class="row">-->
-<!--            <div class="col-lg-6 single-social" id="register-fb">-->
-<!--                <h3>Facebook</h3>-->
-<!--            </div>-->
-<!--            <div class="col-lg-6 single-social" id="register-tw">-->
-<!--                <h3>Twitter</h3>-->
-<!--            </div>-->
-<!--        </div>-->
-<!---->
-<!--        <div class="row">-->
-<!--            <div class="col-lg-6 single-social" id="register-gh">-->
-<!--                <h3>GitHub</h3>-->
-<!--            </div>-->
-<!--            <div class="col-lg-6 single-social" id="register-g">-->
-<!--                <h3>Google</h3>-->
-<!--            </div>-->
-<!--        </div>-->
-<!---->
-<!--        <div class="row">-->
-<!--            <div class="col-lg-6 single-social" id="register-li">-->
-<!--                <h3>LinkedIn</h3>-->
-<!--            </div>-->
-<!--            <div class="col-lg-6 single-social" id="register-lv">-->
-<!--                <h3>Live</h3>-->
-<!--            </div>-->
-<!--        </div>-->
-<!---->
-<!--        <div class="row">-->
-<!--            <div class="col-lg-6 single-social" id="register-fb">-->
-<!--                <h3>Vkontakte</h3>-->
-<!--            </div>-->
-<!--            <div class="col-lg-6 single-social" id="register-fb">-->
-<!--                <h3>Yandex</h3>-->
-<!--            </div>-->
-<!--        </div>-->
+
 
         <?= yii\authclient\widgets\AuthChoice::widget([
             'baseAuthUrl' => ['site/auth']
@@ -87,4 +54,5 @@ $this->params['breadcrumbs'][] = $this->title;
 
     </div>
 </div>
+
 
