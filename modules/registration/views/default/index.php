@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="row">
-    <div class="col-lg-6  col-md-6  col-sm-6  col-xs-12 ">
+    <div class="col-lg-12  col-md-12  col-sm-12  col-xs-12 ">
         <h1><?= Html::encode($this->title) ?></h1>
 
         <p>Please fill out the following fields to register:</p>
@@ -24,8 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'enableAjaxValidation' => true,
             'options' => ['class' => 'form-horizontal'],
             'fieldConfig' => [
-                'template' => "{label}\n<div class=\"col-lg-10\">{input}</div>\n<div class=\"col-lg-12 text-right\">{error}</div>",
-                'labelOptions' => ['class' => 'col-lg-2 control-label'],
+                'template' => "{label}\n<div class=\"col-lg-4\">{input}</div>\n<div class=\"col-lg-4 text-right\">{error}</div>",
+                'labelOptions' => ['class' => 'col-lg-4 control-label'],
             ],
         ]); ?>
 
@@ -36,23 +36,14 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'password_repeat')->passwordInput() ?>
 
         <div class="form-group">
-            <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('Register', ['class' => 'btn btn-primary', 'name' => 'register-button']) ?>
+            <div class="col-lg-offset-4 col-lg-4">
+                <?= Html::submitButton('Register', ['class' => 'btn btn-primary btn-block', 'name' => 'register-button']) ?>
             </div>
         </div>
 
         <?php ActiveForm::end(); ?>
     </div>
-    <!--    Block with socials -->
-    <div class="col-lg-6  col-md-6  col-sm-6  col-xs-12 " id="register-socials">
-        <h1>Or join with social network</h1>
 
-
-        <?= yii\authclient\widgets\AuthChoice::widget([
-            'baseAuthUrl' => ['site/auth']
-        ]) ?>
-
-    </div>
 </div>
 
 

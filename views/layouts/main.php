@@ -6,6 +6,7 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\bootstrap\Modal;
 use app\controllers\SiteController;
+use yii\bootstrap\Tabs;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -44,7 +45,6 @@ AppAsset::register($this);
     {
 
         $items[]=   '<li><a data-toggle="modal" data-target="#modal" style="cursor: pointer;">Log in</a></li>';
-        $items[]=  ['label' => 'Войти', 'url' => ['/site/login']];
         $items[]=  ['label' => 'Зарегистрироваться', 'url' => ['/users/registration']];
     }
 	else
@@ -59,13 +59,8 @@ AppAsset::register($this);
     NavBar::end();
 
 
-    Modal::begin(['id' => 'modal',
-        'header' => '<h1>Log in</h1>',
-		'size'=>'large'	]);
-        $modelLogin = new \app\models\LoginForm();
-        echo $this->render('@app/views/site/login', ['model'=>$modelLogin]);
-
-    Modal::end();
+    // Modal
+    echo $this->render('modal');
 	?>
 
 
