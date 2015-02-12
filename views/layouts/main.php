@@ -60,7 +60,8 @@ AppAsset::register($this);
 
 
     Modal::begin(['id' => 'modal',
-        'header' => '<h1>Log in</h1>'   ]);
+        'header' => '<h1>Log in</h1>',
+		'size'=>'large'	]);
         $modelLogin = new \app\models\LoginForm();
         echo $this->render('@app/views/site/login', ['model'=>$modelLogin]);
 
