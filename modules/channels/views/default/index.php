@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use app\modules\channels\ChannelsAsset;
+$this->registerJSFile('https://cdn.socket.io/socket.io-1.3.3.js');
 ChannelsAsset::register($this);
-
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\channels\models\ChannelSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -21,6 +21,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', 'Create {modelClass}', [
     'modelClass' => 'Channels',
 ]), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create', [
+    'modelClass' => 'Channels',
+]), ['create'], ['class' => 'btn btn-success','id'=>'create']) ?>
+        <?= Html::a(Yii::t('app', 'Join', [
+    'modelClass' => 'Channels',
+]), ['create'], ['class' => 'btn btn-success','id'=>'join']) ?>
     </p>
 <!--
     <?= GridView::widget([
@@ -49,4 +55,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <video autoplay></video>
+    <video id="localVideo" src=""></video>
+    <video id="remoteVideo" src=""></video>
 </div>
