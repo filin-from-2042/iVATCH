@@ -26,8 +26,6 @@ phpunit.phar
 # local phpunit config
 /phpunit.xml
 composer.json
-composer.json
-composer.json
 vendor/autoload.php
 vendor/composer/autoload_namespaces.php
 vendor/composer/autoload_psr4.php
