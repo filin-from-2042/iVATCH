@@ -24,7 +24,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'labelOptions' => ['class' => 'col-lg-4 control-label'],
 
         ],
+        'enableClientValidation' => true,
         'enableAjaxValidation' => true,
+        'validateOnChange'=>false,
+        'validateOnBlur'=>false,
+        'validateOnSubmit'=>true,
         'validationUrl'=>['/site/login'],
     ]); ?>
 

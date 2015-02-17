@@ -23,9 +23,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'id' => 'register-form',
 			'enableAjaxValidation' => true,
 			'validationUrl'=>['/users/registration'],
+            'enableClientValidation' => true,
+            'validateOnChange'=>false,
+            'validateOnBlur'=>true,
+            'validateOnSubmit'=>true,
             'options' => ['class' => 'form-horizontal'],
             'fieldConfig' => [
-                'template' => "{label}\n<div class=\"col-lg-4\">{input}</div>\n<div class=\"col-lg-4 text-right\">{error}</div>",
+                'template' => "{label}\n<div class=\"col-lg-4\">{input}</div>\n<div class=\"col-lg-4 text-left\">{error}</div>",
                 'labelOptions' => ['class' => 'col-lg-4 control-label'],
             ],
         ]); ?>

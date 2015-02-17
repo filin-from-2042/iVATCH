@@ -60,13 +60,20 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
         }
+
+        if (Yii::$app->request->isAjax && $model->load($_POST))
+        {
+            Yii::$app->response->format = 'json';
+            return \yii\widgets\ActiveForm::validate($model);
+        }
+
+        return $this->render('login', [
+              'model' => $model,
+        ]);
     }
 
     public function actionLogout()
