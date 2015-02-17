@@ -1,8 +1,6 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use yii\bootstrap\Tabs;
-use yii\bootstrap\Modal;
 use app\modules\registration\models\RegistrationForm;
 
 /* @var $this yii\web\View */

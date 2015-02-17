@@ -14,7 +14,13 @@ class DefaultController extends Controller
     {
         $model = new RegistrationForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+		if (Yii::$app->request->isAjax && $model->load($_POST))
+		{
+			Yii::$app->response->format = 'json';
+			return \yii\widgets\ActiveForm::validate($model);
+		}
+
+        if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post()) && $model->save()) {
             $login = new LoginForm();
             $login->username = $_POST['RegistrationForm']['username'];
             $login->password = $_POST['RegistrationForm']['password'];
