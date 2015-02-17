@@ -1,0 +1,23 @@
+{
+    "name": "vendor/package_name",
+    "description": "description_text",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "author's name",
+            "email": "email@example.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2-imagine": "2.0.2",
+        "yiisoft/yii2-authclient": "2.0.2",
+        "yiisoft/jquery": "2.1.1",
+        "imagine/imagine": "0.5.x-dev",
+        "yiisoft/yii2-jui": "2.0.2",
+        "bower-asset/jquery": "@stable",
+        "bower-asset/jquery.inputmask": "@stable",
+        "bower-asset/punycode": "@stable",
+        "bower-asset/bootstrap": "@stable"
+    }
+}

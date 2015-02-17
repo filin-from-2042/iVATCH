@@ -13,7 +13,7 @@ nbproject
 Thumbs.db
 
 # composer vendor dir
-#/vendor
+/vendor
 
 # composer itself is not needed
 composer.phar
@@ -25,3 +25,14 @@ composer.phar
 phpunit.phar
 # local phpunit config
 /phpunit.xml
+composer.json
+vendor/autoload.php
+vendor/composer/autoload_namespaces.php
+vendor/composer/autoload_psr4.php
+vendor/yiisoft/extensions.php
+vendor/composer/installed.json
+vendor/composer/autoload_real.php
+vendor/composer/autoload_psr4.php
+vendor/composer/autoload_namespaces.php
+vendor/autoload.php
+composer.json

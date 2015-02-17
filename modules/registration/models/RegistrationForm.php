@@ -12,9 +12,7 @@ use yii\authclient;
  */
 class RegistrationForm extends User
 {
-//    public $username;
-//    public $email;
-//    public $password;
+
     public $password_repeat;
 
 
@@ -26,7 +24,7 @@ class RegistrationForm extends User
         return [
             'username' => \Yii::t('app', 'Username'),
             'password' => \Yii::t('app', 'Password'),
-            'password_repeat' => \Yii::t('app', 'Password '),
+            'password_repeat' => \Yii::t('app', 'Repeat password '),
             'email' => \Yii::t('app', 'Email'),
         ];
     }
