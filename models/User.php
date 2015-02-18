@@ -95,6 +95,18 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * Finds user by social network
+     *
+     * @param  string      $login_id
+     * @param  string      $login_type
+     * @return static|null
+     */
+    public static function findByNetwork($login_id, $login_type)
+    {
+        return static::findOne(['login_id' => $login_id, 'login_type'=>$login_type]);
+    }
+
+    /**
      * @inheritdoc
      */
     public function getId()

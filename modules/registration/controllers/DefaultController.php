@@ -5,6 +5,7 @@ use app\models\LoginForm;
 use Yii;
 use app\models\User;
 use app\modules\registration\models\RegistrationForm;
+use yii\base\Model;
 use yii\web\Controller;
 
 class DefaultController extends Controller
@@ -35,8 +36,38 @@ class DefaultController extends Controller
     }
 
 
-	public function getRoute()
-	{
-		return 'users/registration';
-	}
+//	public function getRoute()
+//	{
+//		return 'users/registration';
+//	}
+
+
+    public function actions()
+    {
+        return [
+            'auth' => [
+                'class' => 'yii\authclient\AuthAction',
+                'successCallback' => [$this, 'successCallback'],
+            ],
+        ];
+    }
+
+    public function successCallback($client)
+    {
+        $attributes = $client->getUserAttributes();
+        print_r($attributes);
+        // user login or signup comes here
+        $login_type = \yii\helpers\StringHelper::basename(get_class($client));
+        $user = User::findByNetwork($attributes['id'],$login_type);
+        if ($user){
+            $login = new LoginForm();
+            $login->load($user);
+            $login->Login();
+        }
+        // register user
+        else{
+            // Generate unique username
+
+        }
+    }
 }

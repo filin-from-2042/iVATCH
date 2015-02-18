@@ -51,20 +51,22 @@ $config = [
                     'clientId' => 'facebook_client_id',
                     'clientSecret' => 'facebook_client_secret',
                 ],
-                'github' => [
-                    'class' => 'yii\authclient\clients\GitHub',
-                ],
+//                'github' => [
+//                    'class' => 'yii\authclient\clients\GitHub',
+//                ],
                 'LinkedIn' => [
                     'class' => 'yii\authclient\clients\LinkedIn',
                 ],
-                'Live' => [
-                    'class' => 'yii\authclient\clients\Live',
-                ],
+//                'Live' => [
+//                    'class' => 'yii\authclient\clients\Live',
+//                ],
                 'Twitter' => [
                     'class' => 'yii\authclient\clients\Twitter',
                 ],
                 'Vkontakte' => [
-                    'class' => 'yii\authclient\clients\Vkontakte',
+                  'class' => 'yii\authclient\clients\VKontakte',
+                  'clientId' => '4765519',
+                  'clientSecret' => 'F4LvBSQDtpluxH1QyLPE',
                 ],
                 'Yandex' => [
                     'class' => 'yii\authclient\clients\YandexOAuth',

@@ -15,7 +15,7 @@ $htmlReg = $this->render('@app/modules/registration/views/default/index', ['mode
 echo '<div class="col-xs-12 " id="register-socials">';
 echo   '<h1>Join with social network</h1>';
 echo     yii\authclient\widgets\AuthChoice::widget([
-    'baseAuthUrl' => ['site/auth']
+    'baseAuthUrl' => ['users/registration/default/auth']
 ]);
 echo '</div>';
 
