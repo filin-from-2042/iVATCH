@@ -67,6 +67,7 @@ $config = [
                   'class' => 'yii\authclient\clients\VKontakte',
                   'clientId' => '4765519',
                   'clientSecret' => 'F4LvBSQDtpluxH1QyLPE',
+                  'scope' => 'email'
                 ],
                 'Yandex' => [
                     'class' => 'yii\authclient\clients\YandexOAuth',

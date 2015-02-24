@@ -67,7 +67,11 @@ class DefaultController extends Controller
         // register user
         else{
             // Generate unique username
-
+            // Basically from name and surname
+            $registration = new RegistrationForm();
+            $registration->password_repeat=$registration->password = Yii::$app->security->generatePasswordHash($attributes['id']);
+            $registration->username = $attributes['first_name']. '_' . $attributes['last_name'];
+            $registration->save();
         }
     }
 }
