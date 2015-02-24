@@ -13,6 +13,7 @@ class ChannelsAsset extends AssetBundle
 //    ];
     public $js = [
         'js/lib/adapter.js',
+        'js/lib/socket.io.js',
         'js/player.js'
     ];
     public $depends = [
