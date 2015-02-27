@@ -152,7 +152,7 @@ $(document).ready(function(){
 
     ////////////////////////////////////////////////////
 
-    var localVideo = document.querySelector('#localVideo');
+//    var localVideo = document.querySelector('#localVideo');
     var remoteVideo = document.querySelector('#remoteVideo');
 
     function handleUserMedia(stream) {
@@ -169,11 +169,12 @@ $(document).ready(function(){
     function handleUserMediaError(error){
         console.log('getUserMedia error: ', error);
     }
-
-    var constraints = {video: true};
-    navigator.getUserMedia(constraints, handleUserMedia, handleUserMediaError);
-
-    console.log('Getting user media with constraints', constraints);
+//
+//    var constraints = {video: true};
+//    navigator.getUserMedia(constraints, handleUserMedia, handleUserMediaError);
+	createPeerConnection();
+	doCall();
+//    console.log('Getting user media with constraints', constraints);
 
     if (location.hostname != "localhost") {
         requestTurn('https://computeengineondemand.appspot.com/turn?username=41784574&key=4080218913');
@@ -318,7 +319,7 @@ $(document).ready(function(){
                 break;
             }
         }
-        if (mLineIndex === null) {
+        if ( !mLineIndex ) {
             return sdp;
         }
 
@@ -363,7 +364,8 @@ $(document).ready(function(){
 
     // Strip CN from sdp before CN constraints is ready.
     function removeCN(sdpLines, mLineIndex) {
-        var mLineElements = sdpLines[mLineIndex].split(' ');
+        var mLineElements = sdpLines[mLineIndex];
+		mLineElements.split(' ');
         // Scan from end for the convenience of removing an item.
         for (var i = sdpLines.length-1; i >= 0; i--) {
             var payload = extractSdp(sdpLines[i], /a=rtpmap:(\d+) CN\/\d+/i);

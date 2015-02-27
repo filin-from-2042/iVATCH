@@ -3,7 +3,7 @@ namespace app\modules\channels;
 
 use yii\web\AssetBundle;
 
-class ChannelsAsset extends AssetBundle
+class ChannelsWatchAsset extends AssetBundle
 {
 //    public $basePath = '@webroot';
 //    public $baseUrl = '@web';
@@ -14,7 +14,7 @@ class ChannelsAsset extends AssetBundle
     public $js = [
         'js/lib/adapter.js',
         'js/lib/socket.io.js',
-//        'js/player.js'
+        'js/watch-player.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
