@@ -71,8 +71,9 @@ class VKontakte extends OAuth2
                 'city',
                 'country',
                 'timezone',
-                'email',
-            ]),
+            ]
+            ),
+            'scope'=>'email'
         ]);
         return array_shift($attributes['response']);
     }

@@ -5,6 +5,8 @@ use app\models\LoginForm;
 use Yii;
 use app\models\User;
 use app\modules\registration\models\RegistrationForm;
+use app\modules\registration\models\SocialRegistration;
+use app\modules\registration\models\SocialLogin;
 use yii\base\Model;
 use yii\web\Controller;
 
@@ -35,6 +37,19 @@ class DefaultController extends Controller
             ]);
     }
 
+	public function GenerateUserName(){
+		// generate username
+//		if (!class_exists('Mudnames_Dictionnaries'))
+//		{
+////			chdir('../');
+//			require('mudnames.php');
+//		}
+		$file = (isset($_GET['f']) && !empty($_GET['f'])) ? $_GET['f'] : 'random' ;
+		$name = Mudnames::generate_name_from($file);
+		return $name;
+	}
+
+
 
 //	public function getRoute()
 //	{
@@ -55,23 +70,19 @@ class DefaultController extends Controller
     public function successCallback($client)
     {
         $attributes = $client->getUserAttributes();
-        print_r($attributes);
         // user login or signup comes here
         $login_type = \yii\helpers\StringHelper::basename(get_class($client));
-        $user = User::findByNetwork($attributes['id'],$login_type);
-        if ($user){
-            $login = new LoginForm();
-            $login->load($user);
-            $login->Login();
-        }
-        // register user
-        else{
-            // Generate unique username
-            // Basically from name and surname
-            $registration = new RegistrationForm();
-            $registration->password_repeat=$registration->password = Yii::$app->security->generatePasswordHash($attributes['id']);
-            $registration->username = $attributes['first_name']. '_' . $attributes['last_name'];
-            $registration->save();
-        }
+        $login = new SocialLogin();
+		// try to register
+	    $registration = new SocialRegistration();
+	    $registration->login_type = $login_type;
+	    $registration->login_id = $attributes['id'];
+	    // generate username
+	    $registration->username = $this->GenerateUserName();
+	    $registration->save();
+        // try to log in
+        $login->login_type=$login_type;
+        $login->login_id=$attributes['id'];
+        $login->Login();
     }
 }

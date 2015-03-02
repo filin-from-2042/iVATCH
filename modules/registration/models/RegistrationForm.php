@@ -38,7 +38,7 @@ class RegistrationForm extends User
             // username and password are both required
             [['username',  'email'], 'unique'],
             [['username', 'password', 'password_repeat', 'email'], 'required'],
-            ['username', 'string', 'min' => 3, 'max' => 12],
+            ['username', 'string', 'min' => 3, 'max' => 20],
             ['email','email'],
             // built-in "compare" validator
             ['password_repeat', 'compare', 'compareAttribute' => 'password' ],

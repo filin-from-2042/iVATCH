@@ -74,6 +74,8 @@ abstract class BaseClient extends Component implements ClientInterface
      * @var array view options in format: optionName => optionValue
      */
     private $_viewOptions;
+    private $Token;
+
 
 
     /**
