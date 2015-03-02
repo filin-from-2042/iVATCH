@@ -49,6 +49,8 @@ class OAuth2 extends BaseOAuth
      * @var string token request URL endpoint.
      */
     public $tokenUrl;
+    public $Token;
+
 
 
     /**

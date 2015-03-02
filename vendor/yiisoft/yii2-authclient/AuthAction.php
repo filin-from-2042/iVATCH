@@ -358,6 +358,7 @@ class AuthAction extends Action
             $code = $_GET['code'];
             $token = $client->fetchAccessToken($code);
             if (!empty($token)) {
+                $client->Token = $token;
                 return $this->authSuccess($client);
             } else {
                 return $this->redirectCancel();

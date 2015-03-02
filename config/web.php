@@ -48,8 +48,8 @@ $config = [
                 ],
                 'facebook' => [
                     'class' => 'yii\authclient\clients\Facebook',
-                    'clientId' => 'facebook_client_id',
-                    'clientSecret' => 'facebook_client_secret',
+                    'clientId' => '415735628596031',
+                    'clientSecret' => 'e66d59b2677f5693d48f1d77c6c47b30',
                 ],
 //                'github' => [
 //                    'class' => 'yii\authclient\clients\GitHub',
