@@ -45,13 +45,14 @@ $(document).ready(function(){
         }
     ]};
 
-    var constraints = {video: true};
+    var constraints = {audio: true};
     var pc_constraints = {'optional': [{'DtlsSrtpKeyAgreement': true}]};
 
     // Set up audio and video regardless of what devices are present.
     var sdpConstraints = {'mandatory': {
-        'OfferToReceiveAudio':true,
-        'OfferToReceiveVideo':true }};
+        'OfferToReceiveAudio':true}
+//        'OfferToReceiveVideo':true }
+};
 
     /////////////////////////////////////////////
 
@@ -59,7 +60,7 @@ $(document).ready(function(){
     var pc;
     var remoteStream;
 //    var socket = io.connect('ivatch-signaling.herokuapp.com');
-    var socket = io.connect('localhost:1234');
+    var socket = io.connect('192.168.0.3:1234');
 
     room = prompt("Enter room name:");
 
@@ -81,7 +82,17 @@ $(document).ready(function(){
     socket.on('message',
         function(message)
         {
-            message =='got user media' && Start();
+			if (message === 'got user media') {
+            	Start();
+			} else if (message.type === 'answer') {
+				pc.setRemoteDescription(new RTCSessionDescription(message));
+			} else if (message.type === 'candidate') {
+				var candidate = new RTCIceCandidate({
+					sdpMLineIndex: message.label,
+					candidate: message.candidate
+				});
+				pc.addIceCandidate(candidate);
+			}
         }
     );
 
@@ -140,9 +151,9 @@ $(document).ready(function(){
 
     function successCallback(localMediaStream) {
         window.stream = localMediaStream; // stream available to console
-        var video = document.querySelector("video");
-        video.src = window.URL.createObjectURL(localMediaStream);
-        video.play();
+//        var video = document.querySelector("video");
+//        video.src = window.URL.createObjectURL(localMediaStream);
+//        video.play();
     }
 
     function errorCallback(error){

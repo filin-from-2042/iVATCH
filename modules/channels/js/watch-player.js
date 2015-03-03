@@ -45,17 +45,20 @@ $(document).ready(function(){
     ]};
 
     var pc_constraints = {'optional': [{'DtlsSrtpKeyAgreement': true}]};
+	var pc;
+	var remoteAudio = document.querySelector('#localAudio');
 
     // Set up audio and video regardless of what devices are present.
     var sdpConstraints = {'mandatory': {
-        'OfferToReceiveAudio':true,
-        'OfferToReceiveVideo':true }};
+        'OfferToReceiveAudio':true}
+//        'OfferToReceiveVideo':true }
+	};
 
     /////////////////////////////////////////////
 
     var room = '';
 //    var socket = io.connect('ivatch-signaling.herokuapp.com');
-    var socket = io.connect('localhost:1234');
+    var socket = io.connect('192.168.0.3:1234');
 
     room = prompt("Enter room name:");
 
@@ -77,6 +80,24 @@ $(document).ready(function(){
         }
     );
 
+    socket.on('message',
+        function(message)
+        {
+			if (message.type === 'offer')
+			{				createPeerConnection();
+				console.log('Sending answer to peer.');
+            	pc.setRemoteDescription(new RTCSessionDescription(message));
+				pc.createAnswer(setLocalAndSendMessage, function(error) {alert(error);}, sdpConstraints);
+			} else if (message.type === 'candidate') {
+				var candidate = new RTCIceCandidate({
+					sdpMLineIndex: message.label,
+					candidate: message.candidate
+				});
+				pc.addIceCandidate(candidate);
+			}
+        }
+    );
+
     /*FUNCTIONS*/
     function sendMessage(message){
         console.log('Client sending message: ', message);
@@ -84,6 +105,139 @@ $(document).ready(function(){
         //   message = JSON.stringify(message);
         // }
         socket.emit('message', message);
+    }
+
+    function createPeerConnection() {
+        try {
+            pc = new RTCPeerConnection(null);
+            pc.onicecandidate = handleIceCandidate;
+            pc.onaddstream = handleRemoteStreamAdded;
+            pc.onremovestream = handleRemoteStreamRemoved;
+            console.log('Created RTCPeerConnnection');
+        } catch (e) {
+            console.log('Failed to create PeerConnection, exception: ' + e.message);
+            alert('Cannot create RTCPeerConnection object.');
+            return;
+        }
+    }
+
+    function setLocalAndSendMessage(sessionDescription) {
+        // Set Opus as the preferred codec in SDP if Opus is present.
+        sessionDescription.sdp = preferOpus(sessionDescription.sdp);
+        pc.setLocalDescription(sessionDescription);
+        console.log('setLocalAndSendMessage sending message' , sessionDescription);
+        sendMessage(sessionDescription);
+    }
+
+    function handleRemoteStreamAdded(event) {
+        console.log('Remote stream added.');
+        remoteAudio.src = window.URL.createObjectURL(event.stream);
+		remoteAudio.play();
+//        remoteStream = event.stream;
+    }
+
+    function handleRemoteStreamRemoved(event) {
+        console.log('Remote stream removed. Event: ', event);
+    }
+
+    function hangup() {
+        console.log('Hanging up.');
+        stop();
+        sendMessage('bye');
+    }
+
+    function handleIceCandidate(event) {
+        console.log('handleIceCandidate event: ', event);
+        if (event.candidate) {
+            sendMessage({
+                type: 'candidate',
+                label: event.candidate.sdpMLineIndex,
+                id: event.candidate.sdpMid,
+                candidate: event.candidate.candidate});
+        } else {
+            console.log('End of candidates.');
+        }
+    }
+
+    function handleCreateOfferError(event){
+        console.log('createOffer() error: ', e);
+    }
+
+    /*---------------------------------------------------- CODEC INIT FUNCTION ----------------------------------------*/
+
+    // Set Opus as the default audio codec if it's present.
+    function preferOpus(sdp) {
+        var sdpLines = sdp.split('\r\n');
+        var mLineIndex;
+        // Search for m line.
+        for (var i = 0; i < sdpLines.length; i++) {
+            if (sdpLines[i].search('m=audio') !== -1) {
+                mLineIndex = i;
+                break;
+            }
+        }
+        if (!mLineIndex ) {
+            return sdp;
+        }
+
+        // If Opus is available, set it as the default in m line.
+        for (i = 0; i < sdpLines.length; i++) {
+            if (sdpLines[i].search('opus/48000') !== -1) {
+                var opusPayload = extractSdp(sdpLines[i], /:(\d+) opus\/48000/i);
+                if (opusPayload) {
+                    sdpLines[mLineIndex] = setDefaultCodec(sdpLines[mLineIndex], opusPayload);
+                }
+                break;
+            }
+        }
+
+        // Remove CN in m line and sdp.
+        sdpLines = removeCN(sdpLines, mLineIndex);
+
+        sdp = sdpLines.join('\r\n');
+        return sdp;
+    }
+
+    function extractSdp(sdpLine, pattern) {
+        var result = sdpLine.match(pattern);
+        return result && result.length === 2 ? result[1] : null;
+    }
+
+    // Set the selected codec to the first in m line.
+    function setDefaultCodec(mLine, payload) {
+        var elements = mLine.split(' ');
+        var newLine = [];
+        var index = 0;
+        for (var i = 0; i < elements.length; i++) {
+            if (index === 3) { // Format of media starts from the fourth.
+                newLine[index++] = payload; // Put target payload to the first.
+            }
+            if (elements[i] !== payload) {
+                newLine[index++] = elements[i];
+            }
+        }
+        return newLine.join(' ');
+    }
+
+    // Strip CN from sdp before CN constraints is ready.
+    function removeCN(sdpLines, mLineIndex) {
+        var mLineElements = sdpLines[mLineIndex].split(' ');
+        // Scan from end for the convenience of removing an item.
+        for (var i = sdpLines.length-1; i >= 0; i--) {
+            var payload = extractSdp(sdpLines[i], /a=rtpmap:(\d+) CN\/\d+/i);
+            if (payload) {
+                var cnPos = mLineElements.indexOf(payload);
+                if (cnPos !== -1) {
+                    // Remove CN payload from m line.
+                    mLineElements.splice(cnPos, 1);
+                }
+                // Remove CN line in sdp
+                sdpLines.splice(i, 1);
+            }
+        }
+
+        sdpLines[mLineIndex] = mLineElements.join(' ');
+        return sdpLines;
     }
 
 });
