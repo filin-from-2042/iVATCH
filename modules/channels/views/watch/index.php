@@ -25,5 +25,5 @@ $this->params['breadcrumbs'][] = $this->title;
 	]), ['create'], ['class' => 'btn btn-success','id'=>'join']) ?>
     </p>
 
-    <audio id="localAudio" src=""></audio>
+    <video id="localAudio" src=""></video>
 </div>

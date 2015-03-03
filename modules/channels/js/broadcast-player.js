@@ -45,7 +45,7 @@ $(document).ready(function(){
         }
     ]};
 
-    var constraints = {audio: true};
+    var constraints = {video: true};
     var pc_constraints = {'optional': [{'DtlsSrtpKeyAgreement': true}]};
 
     // Set up audio and video regardless of what devices are present.
@@ -58,9 +58,10 @@ $(document).ready(function(){
 
     var room = '';
     var pc;
+    var aConnections = [];
     var remoteStream;
-//    var socket = io.connect('ivatch-signaling.herokuapp.com');
-    var socket = io.connect('192.168.0.3:1234');
+    var socket = io.connect('ivatch-signaling.herokuapp.com');
+//    var socket = io.connect('192.168.0.3:1234');
 
     room = prompt("Enter room name:");
 
@@ -82,16 +83,16 @@ $(document).ready(function(){
     socket.on('message',
         function(message)
         {
-			if (message === 'got user media') {
-            	Start();
+			if (message.type === 'got user media') {
+            	Start(message.user_id);
 			} else if (message.type === 'answer') {
-				pc.setRemoteDescription(new RTCSessionDescription(message));
+				aConnections[message.user_id].setRemoteDescription(new RTCSessionDescription(message));
 			} else if (message.type === 'candidate') {
 				var candidate = new RTCIceCandidate({
 					sdpMLineIndex: message.label,
 					candidate: message.candidate
 				});
-				pc.addIceCandidate(candidate);
+                aConnections[message.user_id].addIceCandidate(candidate);
 			}
         }
     );
@@ -104,18 +105,32 @@ $(document).ready(function(){
     );
 
     /*FUNCTIONS*/
-    function Start() {
-            createPeerConnection();
-            pc.addStream(window.stream);
-            doCall();
+    function Start(user_id) {
+            createPeerConnection(user_id);
+            aConnections[user_id].addStream(window.stream);
+            doCall(user_id);
     }
 
-    function createPeerConnection() {
+    function createPeerConnection(user_id) {
         try {
-            pc = new RTCPeerConnection(null);
-            pc.onicecandidate = handleIceCandidate;
-            pc.onaddstream = handleRemoteStreamAdded;
-            pc.onremovestream = handleRemoteStreamRemoved;
+            aConnections[user_id] = new RTCPeerConnection(null);
+            aConnections[user_id].onicecandidate =
+                function (event) {
+                    console.log('handleIceCandidate event: ', event);
+                    if (event.candidate) {
+                        sendMessage({
+                            type: 'candidate',
+                            label: event.candidate.sdpMLineIndex,
+                            id: event.candidate.sdpMid,
+                            candidate: event.candidate.candidate,
+                            user_id:user_id}
+                        );
+                    } else {
+                        console.log('End of candidates.');
+                    }
+                };
+            aConnections[user_id].onaddstream = handleRemoteStreamAdded;
+            aConnections[user_id].onremovestream = handleRemoteStreamRemoved;
             console.log('Created RTCPeerConnnection');
         } catch (e) {
             console.log('Failed to create PeerConnection, exception: ' + e.message);
@@ -124,17 +139,23 @@ $(document).ready(function(){
         }
     }
 
-    function doCall() {
+    function doCall(user_id) {
         console.log('Sending offer to peer');
-        pc.createOffer(setLocalAndSendMessage, handleCreateOfferError);
-    }
-
-    function setLocalAndSendMessage(sessionDescription) {
-        // Set Opus as the preferred codec in SDP if Opus is present.
-        sessionDescription.sdp = preferOpus(sessionDescription.sdp);
-        pc.setLocalDescription(sessionDescription);
-        console.log('setLocalAndSendMessage sending message' , sessionDescription);
-        sendMessage(sessionDescription);
+        aConnections[user_id].createOffer(
+            function (sessionDescription)
+            {
+                // Set Opus as the preferred codec in SDP if Opus is present.
+                sessionDescription.sdp = preferOpus(sessionDescription.sdp);
+                aConnections[user_id].setLocalDescription(sessionDescription);
+                console.log('setLocalAndSendMessage sending message' , sessionDescription);
+                sessionDescription.user_id = user_id;
+                sendMessage(sessionDescription);
+            },
+            function (event)
+            {
+                console.log('createOffer() error: ', e);
+            }
+        );
     }
 
     function sendMessage(message){
@@ -145,9 +166,6 @@ $(document).ready(function(){
         socket.emit('message', message);
     }
 
-    function handleCreateOfferError(event){
-        console.log('createOffer() error: ', e);
-    }
 
     function successCallback(localMediaStream) {
         window.stream = localMediaStream; // stream available to console
@@ -161,18 +179,6 @@ $(document).ready(function(){
     }
 
 
-    function handleIceCandidate(event) {
-        console.log('handleIceCandidate event: ', event);
-        if (event.candidate) {
-            sendMessage({
-                type: 'candidate',
-                label: event.candidate.sdpMLineIndex,
-                id: event.candidate.sdpMid,
-                candidate: event.candidate.candidate});
-        } else {
-            console.log('End of candidates.');
-        }
-    }
 
     function handleRemoteStreamAdded(event) {
         console.log('Remote stream added.');

@@ -46,19 +46,20 @@ $(document).ready(function(){
 
     var pc_constraints = {'optional': [{'DtlsSrtpKeyAgreement': true}]};
 	var pc;
-	var remoteAudio = document.querySelector('#localAudio');
+    var user_id;
+	var remoteVideo= document.querySelector('#localAudio');
 
     // Set up audio and video regardless of what devices are present.
     var sdpConstraints = {'mandatory': {
-        'OfferToReceiveAudio':true}
-//        'OfferToReceiveVideo':true }
+        'OfferToReceiveAudio':true,
+        'OfferToReceiveVideo':true }
 	};
 
     /////////////////////////////////////////////
 
     var room = '';
-//    var socket = io.connect('ivatch-signaling.herokuapp.com');
-    var socket = io.connect('192.168.0.3:1234');
+    var socket = io.connect('ivatch-signaling.herokuapp.com');
+//    var socket = io.connect('192.168.0.3:1234');
 
     room = prompt("Enter room name:");
 
@@ -70,21 +71,29 @@ $(document).ready(function(){
 
 
 
-    sendMessage('got user media');
 
     /*EVENT LISTENERS*/
     socket.on('joined',
         function(room)
         {
             console.log('This peer has joined room ' + room);
+            user_id = this.id;
+            sendMessage(
+                {
+                    type:'got user media',
+                    user_id:this.id
+                }
+            );
         }
     );
 
     socket.on('message',
         function(message)
         {
+            if(message.user_id != this.id) return;
 			if (message.type === 'offer')
-			{				createPeerConnection();
+			{
+                createPeerConnection();
 				console.log('Sending answer to peer.');
             	pc.setRemoteDescription(new RTCSessionDescription(message));
 				pc.createAnswer(setLocalAndSendMessage, function(error) {alert(error);}, sdpConstraints);
@@ -100,6 +109,7 @@ $(document).ready(function(){
 
     /*FUNCTIONS*/
     function sendMessage(message){
+        message.user_id = user_id;
         console.log('Client sending message: ', message);
         // if (typeof message === 'object') {
         //   message = JSON.stringify(message);
@@ -131,8 +141,8 @@ $(document).ready(function(){
 
     function handleRemoteStreamAdded(event) {
         console.log('Remote stream added.');
-        remoteAudio.src = window.URL.createObjectURL(event.stream);
-		remoteAudio.play();
+        remoteVideo.src = window.URL.createObjectURL(event.stream);
+		remoteVideo.play();
 //        remoteStream = event.stream;
     }
 
