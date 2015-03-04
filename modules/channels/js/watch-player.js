@@ -57,11 +57,11 @@ $(document).ready(function(){
 
     /////////////////////////////////////////////
 
-    var room = '';
+    var room = 'qwe';
     var socket = io.connect('ivatch-signaling.herokuapp.com');
 //    var socket = io.connect('192.168.0.3:1234');
 
-    room = prompt("Enter room name:");
+//    room = prompt("Enter room name:");
 
     if (room !== "") {
         console.log('Joining room ' + room);
@@ -81,7 +81,7 @@ $(document).ready(function(){
             sendMessage(
                 {
                     type:'got user media',
-                    user_id:this.id
+                    user_id:user_id
                 }
             );
         }
@@ -106,6 +106,15 @@ $(document).ready(function(){
 			}
         }
     );
+
+    window.onbeforeunload = function(e){
+        sendMessage(
+			{
+				type:'bye',
+                user_id:user_id
+			}
+		);
+    }
 
     /*FUNCTIONS*/
     function sendMessage(message){
@@ -150,11 +159,6 @@ $(document).ready(function(){
         console.log('Remote stream removed. Event: ', event);
     }
 
-    function hangup() {
-        console.log('Hanging up.');
-        stop();
-        sendMessage('bye');
-    }
 
     function handleIceCandidate(event) {
         console.log('handleIceCandidate event: ', event);
