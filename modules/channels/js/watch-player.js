@@ -44,9 +44,11 @@ $(document).ready(function(){
         }
     ]};
 
-    var pc_constraints = {'optional': [{'DtlsSrtpKeyAgreement': true}]};
-	var pc;
-    var user_id;
+	var watching = {};
+    watching.pc_constraints = {'optional': [{'DtlsSrtpKeyAgreement': true}]};
+	watching.peerConnection = null;
+    watching.user_id = null;
+    watching.isStarted = false;
 	var remoteVideo= document.querySelector('#localAudio');
 
     // Set up audio and video regardless of what devices are present.
@@ -58,8 +60,8 @@ $(document).ready(function(){
     /////////////////////////////////////////////
 
     var room = 'qwe';
-    var socket = io.connect('ivatch-signaling.herokuapp.com');
-//    var socket = io.connect('192.168.0.3:1234');
+//    var socket = io.connect('ivatch-signaling.herokuapp.com');
+    var socket = io.connect('192.168.0.3:1234');
 
 //    room = prompt("Enter room name:");
 
@@ -77,11 +79,11 @@ $(document).ready(function(){
         function(room)
         {
             console.log('This peer has joined room ' + room);
-            user_id = this.id;
+            watching.user_id = this.id;
             sendMessage(
                 {
                     type:'got user media',
-                    user_id:user_id
+                    user_id:watching.user_id
                 }
             );
         }
@@ -90,19 +92,20 @@ $(document).ready(function(){
     socket.on('message',
         function(message)
         {
-            if(message.user_id != this.id) return;
+            if(message.user_id != watching.user_id) return;
 			if (message.type === 'offer')
 			{
                 createPeerConnection();
 				console.log('Sending answer to peer.');
-            	pc.setRemoteDescription(new RTCSessionDescription(message));
-				pc.createAnswer(setLocalAndSendMessage, function(error) {alert(error);}, sdpConstraints);
+            	watching.peerConnection.setRemoteDescription(new RTCSessionDescription(message.sessionDescription));
+				watching.peerConnection.createAnswer(setLocalAndSendMessage, function(error) {alert(error);}, sdpConstraints);
 			} else if (message.type === 'candidate') {
+				if(!watching.isStarted) return;
 				var candidate = new RTCIceCandidate({
 					sdpMLineIndex: message.label,
 					candidate: message.candidate
 				});
-				pc.addIceCandidate(candidate);
+				watching.peerConnection.addIceCandidate(candidate);
 			}
         }
     );
@@ -111,14 +114,14 @@ $(document).ready(function(){
         sendMessage(
 			{
 				type:'bye',
-                user_id:user_id
+                user_id:watching.user_id
 			}
 		);
     }
 
     /*FUNCTIONS*/
     function sendMessage(message){
-        message.user_id = user_id;
+        message.user_id = watching.user_id;
         console.log('Client sending message: ', message);
         // if (typeof message === 'object') {
         //   message = JSON.stringify(message);
@@ -128,11 +131,12 @@ $(document).ready(function(){
 
     function createPeerConnection() {
         try {
-            pc = new RTCPeerConnection(null);
-            pc.onicecandidate = handleIceCandidate;
-            pc.onaddstream = handleRemoteStreamAdded;
-            pc.onremovestream = handleRemoteStreamRemoved;
+            watching.peerConnection = new RTCPeerConnection(null);
+            watching.peerConnection.onicecandidate = handleIceCandidate;
+            watching.peerConnection.onaddstream = handleRemoteStreamAdded;
+            watching.peerConnection.onremovestream = handleRemoteStreamRemoved;
             console.log('Created RTCPeerConnnection');
+			watching.isStarted = true;
         } catch (e) {
             console.log('Failed to create PeerConnection, exception: ' + e.message);
             alert('Cannot create RTCPeerConnection object.');
@@ -143,8 +147,12 @@ $(document).ready(function(){
     function setLocalAndSendMessage(sessionDescription) {
         // Set Opus as the preferred codec in SDP if Opus is present.
         sessionDescription.sdp = preferOpus(sessionDescription.sdp);
-        pc.setLocalDescription(sessionDescription);
+        watching.peerConnection.setLocalDescription(sessionDescription);
         console.log('setLocalAndSendMessage sending message' , sessionDescription);
+		sessionDescription = {
+								sessionDescription:sessionDescription,
+								type:'answer'
+							};
         sendMessage(sessionDescription);
     }
 
@@ -167,7 +175,9 @@ $(document).ready(function(){
                 type: 'candidate',
                 label: event.candidate.sdpMLineIndex,
                 id: event.candidate.sdpMid,
-                candidate: event.candidate.candidate});
+                candidate: event.candidate.candidate,
+				user_id:watching.user_id
+			});
         } else {
             console.log('End of candidates.');
         }

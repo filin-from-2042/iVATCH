@@ -45,11 +45,12 @@ $(document).ready(function(){
         }
     ]};
 
-    var constraints = {video: true};
-    var pc_constraints = {'optional': [{'DtlsSrtpKeyAgreement': true}]};
+	var broadcasting = {};
+    broadcasting.constraints = {video: true};
+    broadcasting.pc_constraints = {'optional': [{'DtlsSrtpKeyAgreement': true}]};
 
     // Set up audio and video regardless of what devices are present.
-    var sdpConstraints = {'mandatory': {
+    broadcasting.sdpConstraints = {'mandatory': {
         'OfferToReceiveAudio':true,
         'OfferToReceiveVideo':true }
 	};
@@ -58,10 +59,10 @@ $(document).ready(function(){
 
     var room = '';
     var pc;
-    window.aConnections = [];
+    broadcasting.aConnections = [];
     var remoteStream;
-    var socket = io.connect('ivatch-signaling.herokuapp.com');
-//    var socket = io.connect('192.168.0.3:1234');
+//    var socket = io.connect('ivatch-signaling.herokuapp.com');
+    var socket = io.connect('192.168.0.3:1234');
 
     room = prompt("Enter room name:");
 
@@ -71,7 +72,7 @@ $(document).ready(function(){
         socket.emit('create', room);
     }
 
-    navigator.getUserMedia(constraints, successCallback, errorCallback);
+    navigator.getUserMedia(broadcasting.constraints, successCallback, errorCallback);
 
     /*EVENT LISTENERS*/
     socket.on('created',
@@ -90,7 +91,7 @@ $(document).ready(function(){
 			}
 			else if (message.type === 'answer')
 			{
-				window.aConnections[message.user_id].setRemoteDescription(new RTCSessionDescription(message));
+				broadcasting.aConnections[message.user_id].setRemoteDescription(new RTCSessionDescription(message.sessionDescription));
 			}
 			else if (message.type === 'candidate')
 			{
@@ -98,12 +99,12 @@ $(document).ready(function(){
 					sdpMLineIndex: message.label,
 					candidate: message.candidate
 				});
-                window.aConnections[message.user_id].addIceCandidate(candidate);
+                broadcasting.aConnections[message.user_id].addIceCandidate(candidate);
 			}
 			else if (message.type === 'bye')
 			{
-				console.log(window.aConnections);
-				if(window.aConnections[message.user_id]) window.aConnections[message.user_id].close(); window.aConnections[message.user_id] = null;
+				console.log(broadcasting.aConnections);
+				if(broadcasting.aConnections[message.user_id]) { broadcasting.aConnections[message.user_id].close(); broadcasting.aConnections[message.user_id] = null; }
 			}
         }
     );
@@ -118,30 +119,32 @@ $(document).ready(function(){
     /*FUNCTIONS*/
     function Start(user_id) {
             createPeerConnection(user_id);
-            window.aConnections[user_id].addStream(window.stream);
+            broadcasting.aConnections[user_id].addStream(window.stream);
             doCall(user_id);
     }
 
     function createPeerConnection(user_id) {
         try {
-            window.aConnections[user_id] = new RTCPeerConnection(null);
-            window.aConnections[user_id].onicecandidate =
+            broadcasting.aConnections[user_id] = new RTCPeerConnection(null);
+            broadcasting.aConnections[user_id].onicecandidate =
                 function (event) {
                     console.log('handleIceCandidate event: ', event);
                     if (event.candidate) {
-                        sendMessage({
-                            type: 'candidate',
-                            label: event.candidate.sdpMLineIndex,
-                            id: event.candidate.sdpMid,
-                            candidate: event.candidate.candidate,
-                            user_id:user_id}
+                        sendMessage(
+							{
+								type: 'candidate',
+								label: event.candidate.sdpMLineIndex,
+								id: event.candidate.sdpMid,
+								candidate: event.candidate.candidate,
+								user_id:user_id
+							}
                         );
                     } else {
                         console.log('End of candidates.');
                     }
                 };
-            window.aConnections[user_id].onaddstream = handleRemoteStreamAdded;
-            window.aConnections[user_id].onremovestream = handleRemoteStreamRemoved;
+            broadcasting.aConnections[user_id].onaddstream = handleRemoteStreamAdded;
+            broadcasting.aConnections[user_id].onremovestream = handleRemoteStreamRemoved;
             console.log('Created RTCPeerConnnection');
         } catch (e) {
             console.log('Failed to create PeerConnection, exception: ' + e.message);
@@ -152,15 +155,16 @@ $(document).ready(function(){
 
     function doCall(user_id) {
         console.log('Sending offer to peer');
-        window.aConnections[user_id].createOffer(
+        broadcasting.aConnections[user_id].createOffer(
             function (sessionDescription)
             {
                 // Set Opus as the preferred codec in SDP if Opus is present.
                 sessionDescription.sdp = preferOpus(sessionDescription.sdp);
-                window.aConnections[user_id].setLocalDescription(sessionDescription);
+                broadcasting.aConnections[user_id].setLocalDescription(sessionDescription);
                 console.log('setLocalAndSendMessage sending message' , sessionDescription);
                 sessionDescription.user_id = user_id;
-                sendMessage(sessionDescription);
+				var message = {user_id:user_id,sessionDescription:sessionDescription,type :'offer'};
+                sendMessage(message);
             },
             function (event)
             {
