@@ -85,7 +85,6 @@ a {
     background-color: #f53d54;
 }
 .top-menu .nav-list li{
-    width: 25%;
 }
 .top-menu .nav-list li a{
     color: #ffffff;
@@ -107,6 +106,25 @@ a {
 }
 .register-btn {
 	margin-top: 30px;
+}
+.navbar-nav > li > .dropdown-menu{
+	background: #31353d;
+}
+.dropdown-header{
+	color: #f53d54;
+	font-size: 14px;
+}
+.top-menu .nav-list .dropdown-header:hover{
+	background-color: inherit;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+	color: #fff;
+	text-decoration: none;
+	 background-color: #f53d54;
+}
+
+.dropdown-menu > li > a {
+	padding: 3px 25px;
 }
 /*--------------------------------------------------------- FOOTER ---------------------------------------------------*/
 footer {

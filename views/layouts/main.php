@@ -43,14 +43,29 @@ AppAsset::register($this);
 	];
 	if (Yii::$app->user->isGuest)
     {
-
         $items[]=   '<li><a data-toggle="modal" data-target="#modal" style="cursor: pointer;">Log in</a></li>';
-        $items[]=  ['label' => 'Зарегистрироваться', 'url' => ['/users/registration']];
     }
 	else
 	{
-		$items[]=['label' => 'Профиль', 'url' => 'index.php?r=users/default/view&username='. Yii::$app->user->identity->username .''];
-		$items[]=['label' => 'Выйти (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'],  'linkOptions' => ['data-method' => 'post']];
+		// Show dropdown with user pages
+		$items[] = [
+			'label' => 'Profile  (' . Yii::$app->user->identity->username . ')',
+			'items' => [
+				['label' => 'Profile', 'url' => 'index.php?r=users/default/view&username='. Yii::$app->user->identity->username .''],
+				'<li class="divider"></li>',
+				'<li class="dropdown-header">Most visited channels</li>',
+				['label' => 'Level 1 - Dropdown B', 'url' => '#'],
+				['label' => 'Level 1 - Dropdown B', 'url' => '#'],
+				['label' => 'Level 1 - Dropdown B', 'url' => '#'],
+				'<li class="divider"></li>',
+				'<li class="dropdown-header">Favourite channels</li>',
+				['label' => 'Level 1 - Dropdown B', 'url' => '#'],
+				['label' => 'Level 1 - Dropdown B', 'url' => '#'],
+				['label' => 'Level 1 - Dropdown B', 'url' => '#'],
+				'<li class="divider"></li>',
+				['label' => 'Log out', 'url' => ['/site/logout'],  'linkOptions' => ['data-method' => 'post']],
+			],
+		];
 	}
 	echo Nav::widget([
 		'options' => ['class' => 'navbar-nav navbar-right nav-list'],
