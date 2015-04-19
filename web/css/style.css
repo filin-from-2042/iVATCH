@@ -3,6 +3,10 @@
 	font-family: "Open Sans";
 	src: url(../fonts/open-sans.ttf);
 }
+body{
+    margin-top: 50px;
+}
+
 ol, ul {
     list-style: none;
 }

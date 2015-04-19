@@ -5,10 +5,10 @@
 
 use yii\helpers\Html;
 use app\modules\channels\ChannelsAsset;
-use app\modules\channels\ChannelsWatchAsset;
+use app\widgets;
+use webroot\widgets\watching\WatchingPlayer;
 
 ChannelsAsset::register($this);
-ChannelsWatchAsset::register($this);
 
 
 $this->title = Yii::t('app', 'Channels');
@@ -25,5 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
 	]), ['create'], ['class' => 'btn btn-success','id'=>'join']) ?>
     </p>
 
-    <video id="remoteVideo" src=""></video>
+    <?=WatchingPlayer::widget()?>
+
 </div>

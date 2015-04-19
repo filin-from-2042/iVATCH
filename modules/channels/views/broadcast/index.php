@@ -2,10 +2,11 @@
 
 use yii\helpers\Html;
 use app\modules\channels\ChannelsAsset;
-use app\modules\channels\ChannelsBroadcastAsset;
+use webroot\widgets\broadcasting\BroadcastingPlayer;
+//use app\modules\channels\ChannelsBroadcastAsset;
 
 ChannelsAsset::register($this);
-ChannelsBroadcastAsset::register($this);
+//ChannelsBroadcastAsset::register($this);
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\channels\models\ChannelSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -23,8 +24,5 @@ $this->params['breadcrumbs'][] = $this->title;
     'modelClass' => 'Channels',
 ]), ['create'], ['class' => 'btn btn-success','id'=>'create']) ?>
     </p>
-
-    <video autoplay></video>
-    <video id="localVideo" src=""></video>
-    <video id="remoteVideo" src=""></video>
+    <?=BroadcastingPlayer::widget()?>
 </div>
