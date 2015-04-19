@@ -225,7 +225,11 @@ footer .footer_description{
 	color: white;
 	text-transform: uppercase;
 }
+/*--------------------------- Content----------------------*/
 
+.main_content{
+    margin-top: 50px;
+}
 /*-------------------------------------- MEDIA ------------------------------------------------------------------------*/
 @media (min-width: 768px) and (max-width: 979px) {
 

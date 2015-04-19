@@ -39,7 +39,11 @@ class DefaultController extends Controller
 
 	public function GenerateUserName(){
 		// generate username
-
+//		if (!class_exists('Mudnames_Dictionnaries'))
+//		{
+////			chdir('../');
+//			require('mudnames.php');
+//		}
 		$file = (isset($_GET['f']) && !empty($_GET['f'])) ? $_GET['f'] : 'random' ;
 		$name = Mudnames::generate_name_from($file);
 		return $name;

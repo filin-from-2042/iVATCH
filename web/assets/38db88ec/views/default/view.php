@@ -7,6 +7,11 @@ use yii\bootstrap\ActiveForm;
 UsersAsset::register($this);
 ?>
 <div class="container-fluid user-background" <? echo $model['background_path']?'style="background:url('.$model['background_path'] .') center"': ''?> >
+    <style>
+        .user-background{
+
+        }
+    </style>
     <div class="container">
         <div class="Users-default-index">
             <h2>User profile</h2>

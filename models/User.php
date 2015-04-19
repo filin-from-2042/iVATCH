@@ -29,12 +29,12 @@ class User extends ActiveRecord implements IdentityInterface
             [['username','email'], 'unique'],
             [['username','email','password'], 'required'],
             [['verified', 'banned', 'send_to_email', 'send_newsletter'], 'boolean'],
-            [['login_type', 'image_path'], 'string'],
+            [['login_type', 'image_path', 'background_path'], 'string'],
             ['login_id', 'integer'],
             [['last_visit_timestamp', 'registration_timestamp'], 'safe'],
             [['wallet'], 'number'],
-            [['username', 'password', 'email'], 'string', 'max' => 100],
-            [['registration_ip', 'last_logged_ip'], 'string', 'max' => 20],
+            [['username', 'password', 'email', 'background_path'], 'string', 'max' => 100],
+            [['registration_ip', 'last_logged_ip', 'real_surname', 'real_name'], 'string', 'max' => 20],
             [['currency'], 'string', 'max' => 2],
 //            ['password_repeat', 'compare', 'compareAttribute' => 'password'  ],
         ];
@@ -63,6 +63,9 @@ class User extends ActiveRecord implements IdentityInterface
             'wallet' => \Yii::t('app', 'Wallet'),
             'currency' => \Yii::t('app', 'Currency'),
             'image_path' => \Yii::t('app', 'Image Path'),
+            'background_path' => \Yii::t('app', 'Background Path'),
+            'real_name' => \Yii::t('app', 'Real name'),
+            'real_surname' => \Yii::t('app', 'Real surname'),
         ];
     }
 
