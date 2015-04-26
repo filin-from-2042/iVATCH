@@ -18,6 +18,7 @@
         "bower-asset/jquery": "@stable",
         "bower-asset/jquery.inputmask": "@stable",
         "bower-asset/punycode": "@stable",
-        "bower-asset/bootstrap": "@stable"
+        "bower-asset/bootstrap": "@stable",
+        "nostalgiaz/bootstrap-switch": "3.3.2"
     }
 }

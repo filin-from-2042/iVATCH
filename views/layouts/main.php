@@ -81,7 +81,7 @@ AppAsset::register($this);
 
 
     <!--JUMBOTRON-->
-    <?= $this->render('jumbotron');?>
+    <? //$this->render('jumbotron');?>
 
     <div class="container">
         <div class="row">
