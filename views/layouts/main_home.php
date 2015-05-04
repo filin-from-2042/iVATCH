@@ -62,7 +62,7 @@ AppAsset::register($this);
 				['label' => 'Level 1 - Dropdown B', 'url' => '#'],
 				['label' => 'Level 1 - Dropdown B', 'url' => '#'],
 				'<li class="divider"></li>',
-				['label' => 'Log out', 'url' => ['/site/logout'],  'linkOptions' => ['data-method' => 'post']],
+				['label' => 'Log out', 'url' => ['/users/registration/default/logout'],  'linkOptions' => ['data-method' => 'post']],
 			],
 		];
 	}

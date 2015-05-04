@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\modules\registration\models;
 
 use yii\db\ActiveRecord;
 use yii\helpers\Security;
@@ -70,7 +70,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
 
-/**
+    /**
      * @inheritdoc
      */
     public static function findIdentity($id)

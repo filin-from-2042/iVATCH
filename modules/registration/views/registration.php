@@ -14,8 +14,8 @@ RegistrationAsset::register($this);
 
         <?php $form = ActiveForm::begin([
             'id' => 'register-form',
-			'enableAjaxValidation' => true,
-			'validationUrl'=>['/users/registration'],
+            'enableAjaxValidation' => true,
+            'validationUrl'=>['/users/registration'],
             'enableClientValidation' => true,
             'validateOnChange'=>false,
             'validateOnBlur'=>true,
@@ -27,17 +27,17 @@ RegistrationAsset::register($this);
             ],
         ]); ?>
 
-            <?= $form->field($model, 'username') ?>
-            <?= $form->field($model, 'email') ?>
+        <?= $form->field($model, 'username') ?>
+        <?= $form->field($model, 'email') ?>
 
-            <?= $form->field($model, 'password')->passwordInput() ?>
-            <?= $form->field($model, 'password_repeat')->passwordInput() ?>
+        <?= $form->field($model, 'password')->passwordInput() ?>
+        <?= $form->field($model, 'password_repeat')->passwordInput() ?>
 
-            <div class="form-group">
-                <div class="col-lg-offset-4 col-lg-4">
-                    <?= Html::submitButton('Register', ['class' => 'btn btn-primary btn-block', 'name' => 'register-button']) ?>
-                </div>
+        <div class="form-group">
+            <div class="col-lg-offset-4 col-lg-4">
+                <?= Html::submitButton('Register', ['class' => 'btn btn-primary btn-block', 'name' => 'register-button']) ?>
             </div>
+        </div>
 
         <?php ActiveForm::end(); ?>
     </div>
