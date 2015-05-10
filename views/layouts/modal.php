@@ -33,7 +33,7 @@ Modal::begin(['id' => 'modal',
                 'label' => 'Register',
                 'content' => $htmlReg,
                 'headerOptions' => [''],
-                'options' => ['id' => 'myveryownID'],
+                'options' => ['id' => 'modalForm'],
             ],
 
         ],

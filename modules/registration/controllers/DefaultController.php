@@ -3,7 +3,6 @@
 namespace app\modules\registration\controllers;
 
 use Yii;
-use app\models\User;
 use app\modules\registration\models\RegistrationForm;
 use app\modules\registration\models\SocialRegistration;
 use app\modules\registration\models\SocialLogin;

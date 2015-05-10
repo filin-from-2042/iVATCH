@@ -234,6 +234,9 @@ footer .footer_description{
 .main_content{
     margin-top: 50px;
 }
+.container.required_form {
+    min-height: 500px;
+}
 /*-------------------------------------- MEDIA ------------------------------------------------------------------------*/
 @media (min-width: 768px) and (max-width: 979px) {
 
