@@ -45,4 +45,11 @@ class AjaxController extends Controller
 
         return json_encode(array('content'=>$cContent));
     }
+
+    public function actionCreate()
+    {
+        $aPost = Yii::$app->request->post();
+        if (!Yii::$app->request->isAjax){ return false;}
+
+    }
 }

@@ -50,7 +50,7 @@ AppAsset::register($this);
 		$items[] = [
 			'label' => 'Profile  (' . Yii::$app->user->identity->username . ')',
 			'items' => [
-				['label' => 'Profile', 'url' => 'index.php?r=users/default/view&username='. Yii::$app->user->identity->username .''],
+				['label' => 'Profile', 'url' => 'index.php?r=users/default'],
 				'<li class="divider"></li>',
 				'<li class="dropdown-header">Most visited channels</li>',
 				['label' => 'Level 1 - Dropdown B', 'url' => '#'],

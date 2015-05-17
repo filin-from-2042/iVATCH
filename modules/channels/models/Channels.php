@@ -142,4 +142,9 @@ class Channels extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Users2channels::className(), ['channel_id' => 'id']);
     }
+
+    public function addChannel()
+    {
+
+    }
 }

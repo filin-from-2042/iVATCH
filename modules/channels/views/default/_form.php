@@ -6,13 +6,33 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\modules\channels\models\Channels */
 /* @var $form yii\widgets\ActiveForm */
+
+$this->registerJs('
+    jQuery(document).ready(
+        function()
+        {
+            $("#channels_create").on("submit",
+                function(event)
+                {
+                    event.preventDefault();
+                    $.post("/web/index.php?r=channels/ajax/create",
+                        $(this).serialize(),
+                        function(response)
+                        {
+
+                        }
+                    );
+                }
+            );
+        }
+    );
+');
+
 ?>
 
 <div class="channels-form">
 
-    <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'user_id')->textInput() ?>
+    <?php $form = ActiveForm::begin(['options'=>['id'=>'channels_create']]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => 100]) ?>
 
@@ -35,7 +55,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'subscription_cost')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Create') , ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
