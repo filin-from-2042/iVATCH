@@ -1,0 +1,11 @@
+/*************************************** ***********************/
+#crop-image-widget #image_container{
+    background-color: #ccc;
+    width: 500px;
+    height: 500px;
+}
+#crop-image-widget #panel{
+    display: none;
+}
+#crop-image-widget #dummy{
+}
