@@ -1,0 +1,12 @@
+/*************************************** ***********************/
+#channels_create #image_preview{
+    display: inline-block;
+    width: 150px;
+}
+#channels_create #image_preview{
+    display: inline-block;
+    width: 450px;
+}
+#channels_create p{
+    padding:10px;
+}

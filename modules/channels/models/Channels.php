@@ -3,7 +3,11 @@
 namespace app\modules\channels\models;
 
 use Yii;
-use app\models\User;
+use yii\imagine\Image;
+use Imagine\Image\Box;
+use Imagine\Image\Point;
+use yii\helpers\FileHelper;
+use yii\helpers\Json;
 /**
  * This is the model class for table "channels".
  *
@@ -12,7 +16,6 @@ use app\models\User;
  * @property string $title
  * @property string $description
  * @property integer $category_id
- * @property string $image_path
  * @property integer $tariff_id
  * @property string $tariff_start
  * @property string $tariff_end
@@ -30,6 +33,8 @@ use app\models\User;
  */
 class Channels extends \yii\db\ActiveRecord
 {
+    public $image;
+    public $crop_info;
     /**
      * @inheritdoc
      */
@@ -44,13 +49,15 @@ class Channels extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'title', 'description'], 'required'],
-            [['user_id', 'category_id', 'tariff_id', 'subscribers_count'], 'integer'],
-            [['tariff_start', 'tariff_end'], 'safe'],
-            [['subscribe_plan', 'image_path'], 'string'],
+            [['user_id', 'title', 'description'], 'required', 'message'=>'поле обязательно для заполнения!'],
+            [['user_id', 'title', 'description'], 'trim'],
+            [['user_id'], 'unique','message'=>'У пользователя уже существует канал'],
+            [['user_id', 'subscribers_count'], 'integer'],
+            [['subscribe_plan'], 'string'],
             [['subscription_cost'], 'number'],
             [['title'], 'string', 'max' => 100],
-            [['description'], 'string', 'max' => 255]
+            [['description'], 'string', 'max' => 255],
+            ['crop_info', 'safe']
         ];
     }
 
@@ -62,16 +69,12 @@ class Channels extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'user_id' => Yii::t('app', 'User ID'),
-            'title' => Yii::t('app', 'Title'),
-            'description' => Yii::t('app', 'Description'),
-            'category_id' => Yii::t('app', 'Category ID'),
-            'image_path' => Yii::t('app', 'Image path'),
-            'tariff_id' => Yii::t('app', 'Tariff ID'),
-            'tariff_start' => Yii::t('app', 'Tariff Start'),
-            'tariff_end' => Yii::t('app', 'Tariff End'),
+            'title' => "Название канала",
+            'description' => "Описание канала",
             'subscribers_count' => Yii::t('app', 'Subscribers Count'),
             'subscribe_plan' => Yii::t('app', 'Subscribe Plan'),
             'subscription_cost' => Yii::t('app', 'Subscription Cost'),
+            'image' => "Аватар канала",
         ];
     }
 
@@ -92,23 +95,6 @@ class Channels extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCategory()
-    {
-        return $this->hasOne(Categories::className(), ['id' => 'category_id']);
-    }
-
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTariff()
-    {
-        return $this->hasOne(Tariffs::className(), ['id' => 'tariff_id']);
     }
 
     /**
@@ -143,8 +129,38 @@ class Channels extends \yii\db\ActiveRecord
         return $this->hasMany(Users2channels::className(), ['channel_id' => 'id']);
     }
 
-    public function addChannel()
+    public function afterSave()
     {
+        if(!$this->image) return;
+        // open image
+        $image = Image::getImagine()->open($this->image->tempName);
 
+        // rendering information about crop of ONE option
+        $cropInfo = Json::decode($this->crop_info)[0];
+        $cropInfo['dw'] = (int)$cropInfo['dw']; //new width image
+        $cropInfo['dh'] = (int)$cropInfo['dh']; //new height image
+        $cropInfo['x'] = abs($cropInfo['x']); //begin position of frame crop by X
+        $cropInfo['y'] = abs($cropInfo['y']); //begin position of frame crop by Y
+
+        // remove old
+        $oldImages = FileHelper::findFiles(Yii::getAlias('@app/uploads/channels_logo'), [
+            'only' => [
+                $this->id . '.*',
+            ],
+        ]);
+        for ($i = 0; $i != count($oldImages); $i++) {
+            @unlink($oldImages[$i]);
+        }
+
+        //saving thumbnail
+        $newSizeThumb = new Box($cropInfo['dw'], $cropInfo['dh']);
+        $cropSizeThumb = new Box(200, 200); //frame size of crop
+        $cropPointThumb = new Point($cropInfo['x'], $cropInfo['y']);
+        $pathThumbImage = Yii::getAlias('@app/uploads/channels_logo/') . '/thumb_' . $this->id . '.' . $this->image->getExtension();
+
+        $image->resize($newSizeThumb)
+            ->crop($cropPointThumb, $cropSizeThumb)
+            ->save($pathThumbImage, ['quality' => 100]);
     }
+
 }
