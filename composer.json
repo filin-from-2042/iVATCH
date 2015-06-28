@@ -19,6 +19,7 @@
         "bower-asset/jquery.inputmask": "@stable",
         "bower-asset/punycode": "@stable",
         "bower-asset/bootstrap": "@stable",
-        "nostalgiaz/bootstrap-switch": "3.3.2"
+        "nostalgiaz/bootstrap-switch": "3.3.2",
+        "bupy7/yii2-widget-cropbox": "3.0.1"
     }
 }
