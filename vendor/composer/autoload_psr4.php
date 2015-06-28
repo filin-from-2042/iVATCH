@@ -17,5 +17,9 @@ return array(
     'yii\\bootstrap\\' => array($vendorDir . '/yiisoft/yii2-bootstrap'),
     'yii\\authclient\\' => array($vendorDir . '/yiisoft/yii2-authclient'),
     'yii\\' => array($vendorDir . '/yiisoft/yii2'),
+    'kartik\\slider\\' => array($vendorDir . '/kartik-v/yii2-slider'),
+    'kartik\\icons\\' => array($vendorDir . '/kartik-v/yii2-icons'),
+    'kartik\\base\\' => array($vendorDir . '/kartik-v/yii2-krajee-base'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
+    'bupy7\\cropbox\\' => array($vendorDir . '/bupy7/yii2-widget-cropbox'),
 );
