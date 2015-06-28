@@ -35,10 +35,12 @@ $config = [
     ],
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language' => 'ru-RU',
     'components' => [
         'assetManager' => [
             // some how preserve css cache. Remove in production
 //            'linkAssets' => true,
+        'forceCopy' => true
         ],
         'authClientCollection' => [
             'class' => 'yii\authclient\Collection',
